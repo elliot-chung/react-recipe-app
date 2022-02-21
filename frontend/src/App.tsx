@@ -5,6 +5,7 @@ import Favorites from "./pages/Favorites";
 import Recipe from "./pages/Recipe";
 import Search from "./pages/Search";
 import Error from "./pages/Error";
+import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/recipe/:id" element={<Recipe />} />
         <Route path="/search/:query" element={<Search />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>

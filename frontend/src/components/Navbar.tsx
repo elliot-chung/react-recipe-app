@@ -8,6 +8,7 @@ function Navbar(): JSX.Element {
       <Link to="/"> Home </Link>
       <Searchbar />
       <Link to="/favorites"> Favorites </Link>
+      <Link to="/login"> Login </Link>
     </nav>
   );
 }

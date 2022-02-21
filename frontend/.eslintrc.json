@@ -18,7 +18,8 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "./frontend"
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {}
