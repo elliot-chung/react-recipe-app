@@ -7,10 +7,8 @@ function Searchbar(): JSX.Element {
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-    if (inputRef.current) {
+    if (inputRef.current && inputRef.current.value) {
       navigate(`/search/${inputRef.current.value}`);
-    } else {
-      navigate("/");
     }
   };
 
