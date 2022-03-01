@@ -9,12 +9,20 @@ function Signup(): JSX.Element {
     (await axios.post("http://localhost:5000/users/addUser", values)).data;
 
   const mutation = useMutation((values: FormValues) => postUser(values));
+  const { isLoading, isError, isSuccess } = mutation;
 
   const onSubmit = (values: FormValues): void => {
     mutation.mutate(values);
   };
 
-  return <SignUpForm onSubmit={onSubmit} />;
+  return (
+    <>
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>Error :(</p>}
+      {isSuccess && <p>Success!</p>}
+      <SignUpForm onSubmit={onSubmit} />
+    </>
+  );
 }
 
 export default Signup;
