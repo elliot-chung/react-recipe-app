@@ -12,6 +12,16 @@ app.use(cors());
 
 const PORT = process.env.PORT;
 
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+app.post("/users/addUser", (req, res) => {
+  const { name, email, password } = req.body;
+  console.log(name, email, password);
+  res.send("Hello World");
+});
+
 mongoose
   .connect(`${process.env.CONNECTION_URL}`)
   .then(() =>
