@@ -14,10 +14,8 @@ import Navbar from "./components/Navbar";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({
-    id: 0,
     name: "",
     email: "",
-    password: "",
   });
   const queryClient = useMemo(() => new QueryClient(), []);
 
