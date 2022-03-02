@@ -1,6 +1,7 @@
-import React from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import jwt_decode from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
 import {
   GoogleLogin,
   GoogleLoginResponse,
@@ -9,8 +10,14 @@ import {
 import { useMutation } from "react-query";
 import SignInForm from "../components/SignInForm";
 import FormValues from "../sharedtypes/LoginFormValues";
+import UserObj from "../sharedtypes/UserObj";
+import LoginContext from "../contexts/LoginContext";
 
 function Login(): JSX.Element {
+  const userStates = useContext(LoginContext);
+  const { isLoggedIn, login, setUser } = userStates;
+  const navigate = useNavigate();
+
   const googleSuccess = async (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ): Promise<void> => {
@@ -27,20 +34,47 @@ function Login(): JSX.Element {
     console.log(response);
   };
 
-  const postUser = async (values: FormValues): Promise<void> =>
-    (await axios.post("http://localhost:5000/users/loginUser", values)).data;
+  const storeUserToken = (response: AxiosResponse) => {
+    const { token } = response.data;
+    localStorage.setItem("token", token);
+    const user = jwt_decode<UserObj>(token);
+    setUser({
+      name: user.name,
+      email: user.email,
+    });
+    login();
+    navigate("/");
+  };
 
-  const mutation = useMutation((values: FormValues) => postUser(values));
-  const { isLoading, isError, isSuccess } = mutation;
+  const loginUser = async (values: FormValues): Promise<AxiosResponse> =>
+    axios.post("http://localhost:5000/users/loginUser", values);
+
+  const { mutate, isLoading, isError, isSuccess, error } = useMutation(
+    loginUser,
+    {
+      onSuccess: storeUserToken,
+    }
+  );
 
   const onSubmit = (values: FormValues): void => {
-    mutation.mutate(values);
+    mutate(values);
   };
+
+  if (isLoggedIn) {
+    return (
+      <>
+        <h1>You are already logged in</h1>
+        <Link to="/">Go to Home</Link>
+      </>
+    );
+  }
 
   return (
     <>
       {isLoading && <p>Loading...</p>}
-      {isError && <p>Error :(</p>}
+      {isError && (
+        <p>Error: {(error as AxiosError)?.response?.data?.error?.message}</p>
+      )}
       {isSuccess && <p>Success!</p>}
       <SignInForm onSubmit={onSubmit} />
       <GoogleLogin
