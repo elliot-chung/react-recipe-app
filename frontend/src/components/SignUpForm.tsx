@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FormValues from "../sharedtypes/FormValues";
+import FormValues from "../sharedtypes/RegisterFormValues";
 
 interface Props {
   onSubmit: (values: FormValues) => void;

@@ -1,11 +1,14 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   GoogleLogin,
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from "react-google-login";
-import SignInFrom from "../components/SignInForm";
+import { useMutation } from "react-query";
+import SignInForm from "../components/SignInForm";
+import FormValues from "../sharedtypes/LoginFormValues";
 
 function Login(): JSX.Element {
   const googleSuccess = async (
@@ -24,9 +27,22 @@ function Login(): JSX.Element {
     console.log(response);
   };
 
+  const postUser = async (values: FormValues): Promise<void> =>
+    (await axios.post("http://localhost:5000/users/loginUser", values)).data;
+
+  const mutation = useMutation((values: FormValues) => postUser(values));
+  const { isLoading, isError, isSuccess } = mutation;
+
+  const onSubmit = (values: FormValues): void => {
+    mutation.mutate(values);
+  };
+
   return (
     <>
-      <SignInFrom />
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>Error :(</p>}
+      {isSuccess && <p>Success!</p>}
+      <SignInForm onSubmit={onSubmit} />
       <GoogleLogin
         clientId="853913000249-hbmvigouf2t3b0heg9noss90hk5l9g5b.apps.googleusercontent.com"
         buttonText="Sign in with Google"
