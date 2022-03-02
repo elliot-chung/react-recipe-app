@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import UserObj from "../types/UserObj";
+import UserObj from "../sharedtypes/UserObj";
 
 type LoginContextType = {
   isLoggedIn: boolean;
