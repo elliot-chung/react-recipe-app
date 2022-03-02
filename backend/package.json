@@ -1,14 +1,14 @@
 {
   "name": "backend",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Backend server for recipes app",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.ts",
     "server": "nodemon ./index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Elliot Chung <elliot.sh.chung@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
