@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import auth from "./middleware/auth";
+
+import authRoutes from "./routes/authRoute";
 import userRoutes from "./routes/usersRoute";
+import favoritesRoutes from "./routes/favoritesRoute";
 
 dotenv.config();
 
@@ -24,6 +28,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", userRoutes);
+app.use("/auth", auth, authRoutes);
+app.use("/favorites", auth, favoritesRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`It's alive on port: ${PORT}`));

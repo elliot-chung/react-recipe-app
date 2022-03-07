@@ -13,7 +13,7 @@ export async function addUser(req: Request, res: Response) {
     res.send({ error: "User added successfully" });
   } catch (error) {
     const errorMsg = getErrorMsg(error);
-    res.status(400).send({ error: { message: errorMsg } });
+    res.status(400).send({ error: errorMsg });
   }
 }
 
@@ -24,14 +24,15 @@ export async function loginUser(req: Request, res: Response) {
       if (user.password === req.body.password) {
         const token = jwt.sign(
           { name: user.name, email: user.email },
-          `${process.env.JWT_SECRETs}`
+          `${process.env.JWT_SECRET}`,
+          { expiresIn: "1h" }
         );
         res.send({ token: token });
       } else {
-        res.status(400).send({ error: { message: "Password is incorrect" } });
+        res.status(400).send({ error: "Password is incorrect" });
       }
     } else {
-      res.status(400).send({ error: { message: "User not found" } });
+      res.status(400).send({ error: "User not found" });
     }
   } catch (error) {
     const errorMsg = getErrorMsg(error);
