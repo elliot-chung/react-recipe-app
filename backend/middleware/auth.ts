@@ -31,7 +31,7 @@ function auth(req: Request, res: Response, next: NextFunction) {
     req.user = { name: decoded.name, email: decoded.email };
     next();
   } catch (error) {
-    res.status(400).send({ error: getErrorMsg(error) });
+    res.status(401).send({ error: getErrorMsg(error) });
   }
 }
 
