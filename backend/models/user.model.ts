@@ -14,13 +14,8 @@ const User = new mongoose.Schema(
       unique: true,
       required: true,
     },
-    password: {
+    hashedPassword: {
       type: String,
-      maxlength: [100, "Password must be less than 100 characters"],
-      match: [
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Password must contain at least one number, one letter and one special character",
-      ],
       required: true,
     },
   },
