@@ -36,7 +36,10 @@ function useAuth() {
     () => ({
       isLoggedIn,
       login: () => setIsLoggedIn(true),
-      logout: () => setIsLoggedIn(false),
+      logout: () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem("token");
+      },
       user,
       setUser,
     }),
