@@ -1,13 +1,37 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import RecipeCard from "../components/RecipeCard";
+import useSearch from "../controllers/SearchController";
 
-function Search() {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get("query");
+interface SearchResult {
+  id: number;
+  image: string;
+  readyInMinutes: number;
+  servings: number;
+  sourceUrl: string;
+  title: string;
+}
+
+function Search(): JSX.Element {
+  let baseImageUri = "https://spoonacular.com/recipeImages/";
+  const { query, data, error, isError, isLoading, isSuccess } = useSearch();
+  if (isSuccess) baseImageUri = data?.data.baseUri;
   return (
-    <div>
+    <main>
       <h1>Showing results for: {query}</h1>
-    </div>
+      {isError && <div>Error: {error}</div>}
+      {isLoading && <div>Loading...</div>}
+      {isSuccess &&
+        data?.data.results.map((item: SearchResult) => (
+          <RecipeCard
+            key={item.id}
+            image={baseImageUri + item.image}
+            readyInMinutes={item.readyInMinutes}
+            servings={item.servings}
+            sourceUrl={item.sourceUrl}
+            title={item.title}
+          />
+        ))}
+    </main>
   );
 }
 
