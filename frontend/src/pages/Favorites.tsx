@@ -1,10 +1,10 @@
 import React from "react";
 
-function Favorites() {
+function Favorites(): JSX.Element {
   return (
-    <div>
+    <main>
       <h1>This is the Favorites Page</h1>
-    </div>
+    </main>
   );
 }
 

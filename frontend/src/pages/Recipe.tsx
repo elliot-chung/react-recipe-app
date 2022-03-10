@@ -1,10 +1,10 @@
 import React from "react";
 
-function Recipe() {
+function Recipe(): JSX.Element {
   return (
-    <div>
+    <main>
       <h1>This is the Recipe Page</h1>
-    </div>
+    </main>
   );
 }
 

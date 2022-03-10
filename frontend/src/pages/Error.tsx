@@ -1,10 +1,10 @@
 import React from "react";
 
-function Error() {
+function Error(): JSX.Element {
   return (
-    <div>
+    <main>
       <h1>This is the Error Page</h1>
-    </div>
+    </main>
   );
 }
 

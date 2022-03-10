@@ -1,10 +1,10 @@
 import React from "react";
 
-function Home() {
+function Home(): JSX.Element {
   return (
-    <div>
+    <main>
       <h1>This is the Home Page</h1>
-    </div>
+    </main>
   );
 }
 
