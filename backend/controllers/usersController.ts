@@ -29,7 +29,7 @@ export async function loginUser(req: Request, res: Response) {
     if (!isPasswordMatch)
       res.status(400).send({ error: "Password is incorrect" });
     const token = jwt.sign(
-      { name: user.name, email: user.email },
+      { name: user.name, email: user.email, id: user._id },
       `${process.env.JWT_SECRET}`,
       { expiresIn: "1h" }
     );

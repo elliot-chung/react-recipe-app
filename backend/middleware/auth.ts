@@ -8,14 +8,15 @@ declare global {
       user?: {
         name: string;
         email: string;
+        id: string;
       };
     }
   }
 }
-
 interface tokenObject {
   name: string;
   email: string;
+  id: string;
 }
 
 function auth(req: Request, res: Response, next: NextFunction) {
@@ -28,7 +29,7 @@ function auth(req: Request, res: Response, next: NextFunction) {
       token,
       `${process.env.JWT_SECRET}`
     ) as tokenObject;
-    req.user = { name: decoded.name, email: decoded.email };
+    req.user = { name: decoded.name, email: decoded.email, id: decoded.id };
     next();
   } catch (error) {
     res.status(401).send({ error: getErrorMsg(error) });
