@@ -1,6 +1,17 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
+
+function checkAuth() {
+  const config: AxiosRequestConfig = {
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    url: "http://localhost:5000/auth/check",
+  };
+  return axios(config);
+}
 
 function useAuth() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,10 +24,7 @@ function useAuth() {
 
   const { isError, isSuccess, data } = useQuery(
     ["token_check", token],
-    () => {
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      return axios.get("http://localhost:5000/auth/check");
-    },
+    checkAuth,
     { enabled: !!token }
   );
 

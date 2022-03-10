@@ -1,40 +1,46 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import axios, { AxiosResponse } from "axios";
-import { useMutation, UseMutationResult } from "react-query";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { useMutation } from "react-query";
 import LoginContext from "../contexts/LoginContext";
 import FormValues from "../sharedtypes/LoginFormValues";
 import UserObj from "../sharedtypes/UserObj";
 
-function useLogin(): UseMutationResult<
-  AxiosResponse,
-  Error,
-  FormValues,
-  unknown
-> {
-  const userStates = useContext(LoginContext);
-  const { login, setUser } = userStates;
-  const navigate = useNavigate();
-
-  const storeUserToken = (response: AxiosResponse) => {
-    const { token } = response.data;
-    localStorage.setItem("token", token);
-    const user = jwt_decode<UserObj>(token);
-    setUser({
-      name: user.name,
-      email: user.email,
-    });
-    login();
-    navigate("/");
+async function loginUser(values: FormValues): Promise<AxiosResponse> {
+  const config: AxiosRequestConfig = {
+    method: "post",
+    url: "http://localhost:5000/users/loginUser",
+    data: values,
   };
 
-  const loginUser = async (values: FormValues): Promise<AxiosResponse> =>
-    axios.post("http://localhost:5000/users/loginUser", values);
+  return axios(config);
+}
 
-  return useMutation(loginUser, {
+function useLogin() {
+  const { login, setUser } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  const storeUserToken = useCallback(
+    (response: AxiosResponse) => {
+      const { token } = response.data;
+      localStorage.setItem("token", token);
+      const user = jwt_decode<UserObj>(token);
+      setUser({
+        name: user.name,
+        email: user.email,
+      });
+      login();
+      navigate("/");
+    },
+    [login, navigate, setUser]
+  );
+
+  const output = useMutation(loginUser, {
     onSuccess: storeUserToken,
   });
+
+  return output;
 }
 
 export default useLogin;
