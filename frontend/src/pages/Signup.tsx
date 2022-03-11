@@ -16,12 +16,12 @@ function Signup(): JSX.Element {
   };
 
   return (
-    <>
+    <main>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error :{(error as AxiosError)?.response?.data?.error}</p>}
       {isSuccess && <p>Success!</p>}
       <SignUpForm onSubmit={onSubmit} />
-    </>
+    </main>
   );
 }
 
