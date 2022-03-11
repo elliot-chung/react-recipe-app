@@ -1,4 +1,5 @@
 import React from "react";
+import StyledRecipeCard from "./styles/RecipeCard.style";
 
 interface RecipeCardProps {
   image: string;
@@ -16,13 +17,15 @@ function RecipeCard({
   title,
 }: RecipeCardProps): JSX.Element {
   return (
-    <div>
-      <h1>{title}</h1>
+    <StyledRecipeCard>
       <img src={image} alt={title} />
-      <p>Ready in {readyInMinutes} minutes</p>
-      <p>Servings: {servings}</p>
-      <a href={sourceUrl}>Original</a>
-    </div>
+      <div>
+        <p>{title}</p>
+        <p>Ready in {readyInMinutes} minutes</p>
+        <p>Servings: {servings}</p>
+        <a href={sourceUrl}>Original</a>
+      </div>
+    </StyledRecipeCard>
   );
 }
 
