@@ -1,8 +1,10 @@
-import React from "react";
-import StyledRecipeCard from "./styles/RecipeCard.style";
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import StyledRecipeCard from "../styles/RecipeCard.style";
 
 interface RecipeCardProps {
   image: string;
+  id: number;
   readyInMinutes: number;
   servings: number;
   sourceUrl: string;
@@ -11,13 +13,19 @@ interface RecipeCardProps {
 
 function RecipeCard({
   image,
+  id,
   readyInMinutes,
   servings,
   sourceUrl,
   title,
 }: RecipeCardProps): JSX.Element {
+  const navigate = useNavigate();
+  const handleClick = useCallback(() => {
+    navigate(`/recipe/${id}`);
+  }, [navigate, id]);
+
   return (
-    <StyledRecipeCard>
+    <StyledRecipeCard onClick={handleClick}>
       <img src={image} alt={title} />
       <div>
         <p>{title}</p>

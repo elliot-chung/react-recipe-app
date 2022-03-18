@@ -11,10 +11,11 @@ interface SearchResult {
   title: string;
 }
 
+let baseImageUri = "https://spoonacular.com/recipeImages/";
+
 function Search(): JSX.Element {
-  let baseImageUri = "https://spoonacular.com/recipeImages/";
   const { query, data, error, isError, isLoading, isSuccess } = useSearch();
-  if (isSuccess) baseImageUri = data?.data.baseUri;
+  if (isSuccess) baseImageUri = data?.data.baseUri || baseImageUri;
   return (
     <main>
       <h1>Showing results for: {query}</h1>
@@ -24,6 +25,7 @@ function Search(): JSX.Element {
         data?.data.results.map((item: SearchResult) => (
           <RecipeCard
             key={item.id}
+            id={item.id}
             image={baseImageUri + item.image}
             readyInMinutes={item.readyInMinutes}
             servings={item.servings}
