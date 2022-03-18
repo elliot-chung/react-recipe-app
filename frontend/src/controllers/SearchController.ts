@@ -2,12 +2,12 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 
-interface SponacularSearchParams {
+interface SpoonacularSearchParams {
   query: string;
 }
 
 async function spoonacularSearch(
-  spoonacularSearchParams: SponacularSearchParams
+  spoonacularSearchParams: SpoonacularSearchParams
 ) {
   const config: AxiosRequestConfig = {
     method: "GET",
@@ -25,7 +25,7 @@ function useSearch() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
-  const spoonacularSearchParams: SponacularSearchParams = {
+  const spoonacularSearchParams: SpoonacularSearchParams = {
     query,
   };
 
