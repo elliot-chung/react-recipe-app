@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledRecipeCard = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 4px rgba(0 0 0 / 25%);
-  background: ${({ theme }) => theme.colors.secondaryBackground};
+  background: ${({ theme }) => theme.colors.tertiaryBackground};
   flex-shrink: 0;
   margin: 10px;
   position: relative;
@@ -25,7 +25,7 @@ const StyledRecipeCard = styled.div`
   }
 
   div {
-    background-color: ${({ theme }) => theme.colors.primaryBackground};
+    background-color: ${({ theme }) => theme.colors.secondaryBackground};
     border-radius: 0 0 10px 10px;
     bottom: 0;
     height: 30%;
