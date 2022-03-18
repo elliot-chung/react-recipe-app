@@ -5,9 +5,8 @@ const StyledNavbar = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.primaryBackground};
+  background-color: ${({ theme }) => theme.colors.secondaryBackground};
   padding: 10px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primaryInk};
   box-shadow: 0 4px 4px rgba(0 0 0 / 25%);
   z-index: 1;
   position: fixed;
