@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         width: 100vw;
         overflow-x: hidden;
+        background-color: ${({ theme }) => theme.colors.primaryBackground};
     }
 
     div,
@@ -80,7 +81,7 @@ const GlobalStyle = createGlobalStyle`
     legend,
     label {
         border: 0;
-        color: var(--color-neutrals-black);
+        color: ${({ theme }) => theme.colors.primaryInk};
         font-size: 100%;
         margin: 0;
         padding: 0;
@@ -129,7 +130,6 @@ const GlobalStyle = createGlobalStyle`
     a:focus,
     a:hover,
     a:active {
-        color: inherit;
         text-decoration: none;
     }
 
@@ -169,13 +169,14 @@ const GlobalStyle = createGlobalStyle`
     /* main body padding */
 
     main {
+        margin-top: ${({ theme }) => theme.sharedValues.navbarHeight};
         padding: 25px;
     }
 
     @media (min-width: 768px) {
-    main {
-        padding: 50px;
-    }
+        main {
+            padding: 50px;
+        }
     }
 
 `;
