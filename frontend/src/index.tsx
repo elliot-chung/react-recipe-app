@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "styled-components";
-import GlobalStyle from "./components/styles/Global";
-import { lightTheme } from "./components/styles/themes";
+import GlobalStyle from "./styles/Global";
+import { lightTheme } from "./styles/themes";
 import App from "./App";
 
 const queryClient = new QueryClient();
