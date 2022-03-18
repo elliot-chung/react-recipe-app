@@ -28,7 +28,7 @@ function RecipeCard({
     <StyledRecipeCard onClick={handleClick}>
       <img src={image} alt={title} />
       <div>
-        <p>{title}</p>
+        <h5>{title}</h5>
         <p>Ready in {readyInMinutes} minutes</p>
         <p>Servings: {servings}</p>
         <a href={sourceUrl}>Original</a>
