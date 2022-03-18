@@ -31,12 +31,12 @@ function useRecipe() {
   );
 
   if (isSuccess) {
-    id = data?.data?.id;
-    title = data?.data?.title;
-    imgUrl = data?.data?.image;
-    readyInMinutes = data?.data?.readyInMinutes;
-    servings = data?.data?.servings;
-    instructions = data?.data?.instructions;
+    id = data?.data?.id || 0;
+    title = data?.data?.title || "Title Not Found";
+    imgUrl = data?.data?.image || "";
+    readyInMinutes = data?.data?.readyInMinutes || 0;
+    servings = data?.data?.servings || 0;
+    instructions = data?.data?.instructions || "No Instructions Found";
   }
 
   return {
