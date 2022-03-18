@@ -2,36 +2,37 @@ import { DefaultTheme } from "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    sharedValues: {
+      navbarHeight: string;
+    };
     colors: {
-      primaryBlue: string;
-      primaryRed: string;
-      neutralBlack: string;
-      neutralDarkGrey: string;
-      neutralGrey: string;
-      neutralLightGrey: string;
-      neutralSLightGrey: string;
-      neutralWhite: string;
+      primaryInk: string;
+      secondaryBackground: string;
+      primaryBackground: string;
     };
   }
 }
 
-const defaultVals = {};
+const defaultVals = {
+  sharedValues: {
+    navbarHeight: "60px",
+  },
+};
 
 export const lightTheme: DefaultTheme = {
   ...defaultVals,
   colors: {
-    primaryBlue: "#4d96ea",
-    primaryRed: "#ff5151",
-    neutralBlack: "#333",
-    neutralDarkGrey: "#747678",
-    neutralGrey: "#acacac",
-    neutralLightGrey: "#f4f4f4",
-    neutralSLightGrey: "#f6f6f8",
-    neutralWhite: "#fff",
+    primaryInk: "#505050",
+    secondaryBackground: "#f4f4f4",
+    primaryBackground: "#fff",
   },
 };
 
 export const darkTheme: DefaultTheme = {
   ...defaultVals,
-  colors: {},
+  colors: {
+    primaryInk: "#FFFFFF",
+    secondaryBackground: "#101010",
+    primaryBackground: "#121212",
+  },
 };
