@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         border: 0;
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 16px;
         line-height: 1.5;
         margin: 0;
         padding: 0;
@@ -166,16 +167,32 @@ const GlobalStyle = createGlobalStyle`
         font-size: 16px;
     }
 
-    /* main body padding */
-
     main {
-        margin-top: ${({ theme }) => theme.sharedValues.navbarHeight};
-        padding: 25px;
+        margin-top: ${({ theme }) => theme.componentSizes.navbarHeight};
     }
 
-    @media (min-width: 768px) {
+    /* main body padding */
+    ${({ theme }) => theme.mediaQueries.mobile} {
         main {
-            padding: 50px;
+            padding: 1rem;
+        }
+    }
+
+    ${({ theme }) => theme.mediaQueries.tablet} {
+        main {
+            padding: 2rem;
+        }
+    }
+
+    ${({ theme }) => theme.mediaQueries.desktop} {
+        main {
+            padding: 3rem;
+        }
+    }
+
+    ${({ theme }) => theme.mediaQueries.desktopL} {
+        main {
+            padding: 4rem;
         }
     }
 
