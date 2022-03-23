@@ -7,6 +7,7 @@ type RecipeSidebarProps = {
   title: string;
   readyInMinutes: number;
   servings: number;
+  sourceUrl: string;
   favoriteState: string;
   setShowModal: (state: boolean) => void;
 };
@@ -18,6 +19,7 @@ function RecipeSideBar({
   title,
   readyInMinutes,
   servings,
+  sourceUrl,
   favoriteState,
   setShowModal,
 }: RecipeSidebarProps) {
@@ -27,6 +29,9 @@ function RecipeSideBar({
       <h1>{title || loading}</h1>
       <p>Ready in {readyInMinutes || loading} minutes</p>
       <p>Servings: {servings || loading}</p>
+      <a href={sourceUrl} target="_blank" rel="noopener noreferrer">
+        <p>Original</p>
+      </a>
       <FavoriteHeart
         favoriteState={favoriteState}
         setShowModal={setShowModal}
