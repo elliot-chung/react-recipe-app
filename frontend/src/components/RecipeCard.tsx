@@ -7,7 +7,6 @@ interface RecipeCardProps {
   id: number;
   readyInMinutes: number;
   servings: number;
-  sourceUrl: string;
   title: string;
 }
 
@@ -16,7 +15,6 @@ function RecipeCard({
   id,
   readyInMinutes,
   servings,
-  sourceUrl,
   title,
 }: RecipeCardProps): JSX.Element {
   const navigate = useNavigate();
@@ -31,7 +29,6 @@ function RecipeCard({
         <h5>{title}</h5>
         <p>Ready in {readyInMinutes} minutes</p>
         <p>Servings: {servings}</p>
-        <a href={sourceUrl}>Original</a>
       </div>
     </StyledRecipeCard>
   );
