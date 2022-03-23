@@ -7,7 +7,6 @@ interface SearchResult {
   image: string;
   readyInMinutes: number;
   servings: number;
-  sourceUrl: string;
   title: string;
 }
 
@@ -19,8 +18,8 @@ function Search(): JSX.Element {
   return (
     <main>
       <h1>Showing results for: {query}</h1>
-      {isError && <div>Error: {error}</div>}
-      {isLoading && <div>Loading...</div>}
+      {isError && <p>Error: {error}</p>}
+      {isLoading && <p>Loading...</p>}
       {isSuccess &&
         data?.data.results.map((item: SearchResult) => (
           <RecipeCard
@@ -29,7 +28,6 @@ function Search(): JSX.Element {
             image={baseImageUri + item.image}
             readyInMinutes={item.readyInMinutes}
             servings={item.servings}
-            sourceUrl={item.sourceUrl}
             title={item.title}
           />
         ))}
