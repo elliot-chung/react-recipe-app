@@ -6,7 +6,7 @@ import FormValues from "../sharedtypes/RegisterFormValues";
 
 function Signup(): JSX.Element {
   const postUser = async (values: FormValues): Promise<void> =>
-    axios.post("http://localhost:5000/users/addUser", values);
+    axios.put("http://localhost:5000/users/addUser", values);
 
   const mutation = useMutation((values: FormValues) => postUser(values));
   const { isLoading, isError, isSuccess, error } = mutation;
