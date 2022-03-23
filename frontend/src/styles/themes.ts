@@ -2,7 +2,14 @@ import { DefaultTheme } from "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    sharedValues: {
+    mediaQueries: {
+      mobile: string;
+      tablet: string;
+      desktop: string;
+      desktopL: string;
+    };
+    componentSizes: {
+      recipeCardSize: string;
       navbarHeight: string;
     };
     colors: {
@@ -15,8 +22,15 @@ declare module "styled-components" {
 }
 
 const defaultVals = {
-  sharedValues: {
-    navbarHeight: "60px",
+  mediaQueries: {
+    mobile: "@media(min-width: 320px)",
+    tablet: "@media(min-width: 768px)",
+    desktop: "@media(min-width: 1024px)",
+    desktopL: "@media(min-width: 1280px)",
+  },
+  componentSizes: {
+    recipeCardSize: "20rem",
+    navbarHeight: "4rem",
   },
 };
 

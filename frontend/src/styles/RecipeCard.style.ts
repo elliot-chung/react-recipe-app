@@ -1,37 +1,48 @@
 import styled from "styled-components";
 
 const StyledRecipeCard = styled.div`
-  border-radius: 10px;
-  box-shadow: 0 4px 4px rgba(0 0 0 / 25%);
-  background: ${({ theme }) => theme.colors.tertiaryBackground};
+  --main-color: ${({ theme }) => theme.colors.secondaryBackground};
+  --loading-color: ${({ theme }) => theme.colors.tertiaryBackground};
+  --card-size: ${({ theme }) => theme.componentSizes.recipeCardSize};
+  --card-margin: calc(var(--card-size) / 30);
+  --card-radius: calc(var(--card-size) / 30);
+  --small-shadow-size: calc(var(--card-size) / 80);
+  --large-shadow-size: calc(var(--card-size) / 40);
+
+  border-radius: var(--card-radius);
+  box-shadow: 0 var(--small-shadow-size) var(--small-shadow-size)
+    rgba(0 0 0 / 25%);
+  background: var(--loading-color);
   flex-shrink: 0;
-  margin: 10px;
+  margin: var(--card-margin);
   position: relative;
   transition: all 0.2s ease;
-  width: 300px;
-  height: 300px;
+  width: var(--card-size);
+  height: var(--card-size);
+  cursor: pointer;
 
   &:hover {
-    box-shadow: 0 8px 8px rgba(0 0 0 / 25%);
+    box-shadow: 0 var(--large-shadow-size) var(--large-shadow-size)
+      rgba(0 0 0 / 25%);
     transform: scale(1.02);
   }
 
   img {
-    border-radius: 10px 10px 0 0;
+    border-radius: var(--card-radius) var(--card-radius) 0 0;
     object-fit: cover;
     object-position: center;
-    max-height: 70%;
+    max-height: 80%;
     width: 100%;
   }
 
   div {
-    background-color: ${({ theme }) => theme.colors.secondaryBackground};
-    border-radius: 0 0 10px 10px;
+    background-color: var(--main-color);
+    border-radius: 0 0 var(--card-radius) var(--card-radius);
     bottom: 0;
-    height: 30%;
-    padding: 10px 20px;
+    height: 20%;
+    padding: 3% 5%;
     position: absolute;
-    width: calc(100% - 40px);
+    width: 90%;
 
     h5 {
       overflow: hidden;
@@ -42,7 +53,7 @@ const StyledRecipeCard = styled.div`
 
     a,
     p {
-      font-size: 0.8em;
+      font-size: 12px;
     }
   }
 `;
