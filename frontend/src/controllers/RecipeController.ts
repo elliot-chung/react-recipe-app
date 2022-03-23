@@ -21,6 +21,7 @@ function useRecipe() {
   let imgUrl = "";
   let readyInMinutes = 0;
   let servings = 0;
+  let sourceUrl = "";
   let instructions = "";
 
   const [favoriteState, setFavoriteState] = useState("loading");
@@ -36,6 +37,7 @@ function useRecipe() {
     imgUrl = data?.data?.image || "";
     readyInMinutes = data?.data?.readyInMinutes || 0;
     servings = data?.data?.servings || 0;
+    sourceUrl = data?.data?.sourceUrl || "No Source Found";
     instructions = data?.data?.instructions || "No Instructions Found";
   }
 
@@ -45,6 +47,7 @@ function useRecipe() {
     imgUrl,
     readyInMinutes,
     servings,
+    sourceUrl,
     instructions,
     isError,
     favoriteState,
