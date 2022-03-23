@@ -14,6 +14,7 @@ function Recipe(): JSX.Element {
     title,
     readyInMinutes,
     servings,
+    sourceUrl,
     instructions,
     favoriteState,
     setFavoriteState,
@@ -36,6 +37,7 @@ function Recipe(): JSX.Element {
         title={title}
         readyInMinutes={readyInMinutes}
         servings={servings}
+        sourceUrl={sourceUrl}
         favoriteState={favoriteState}
         setShowModal={setShowModal}
       />
