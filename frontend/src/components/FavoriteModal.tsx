@@ -15,9 +15,11 @@ function FavoriteModal({
   setShowModal,
 }: FavoriteModalProps) {
   const closeModal = useCallback(() => setShowModal(false), [setShowModal]);
+
+  const isFavorite = false;
   useEffect(() => {
-    setFavoriteState(recipeId === 535835 ? "favorite" : "notFavorite");
-  }, [recipeId, setFavoriteState]);
+    setFavoriteState(isFavorite ? "favorite" : "notFavorite");
+  }, [isFavorite, recipeId, setFavoriteState]);
   return showModal ? (
     <StyledFavoriteModal>
       <div>
