@@ -2,18 +2,13 @@ import React, { useContext } from "react";
 import { AxiosError } from "axios";
 import { Link } from "react-router-dom";
 import SignInForm from "../components/SignInForm";
-import FormValues from "../sharedtypes/LoginFormValues";
 import LoginContext from "../contexts/LoginContext";
 import useLogin from "../controllers/LoginController";
 
 function Login(): JSX.Element {
   const userStates = useContext(LoginContext);
   const { isLoggedIn } = userStates;
-  const { isLoading, isError, isSuccess, error, mutate } = useLogin();
-
-  const onSubmit = (values: FormValues): void => {
-    mutate(values);
-  };
+  const { isLoading, isError, isSuccess, error, onSubmit } = useLogin();
 
   if (isLoggedIn) {
     return (

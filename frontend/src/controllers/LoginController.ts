@@ -36,11 +36,18 @@ function useLogin() {
     [login, navigate, setUser]
   );
 
-  const output = useMutation(loginUser, {
-    onSuccess: storeUserToken,
-  });
+  const { isLoading, isError, isSuccess, error, mutate } = useMutation(
+    loginUser,
+    {
+      onSuccess: storeUserToken,
+    }
+  );
 
-  return output;
+  const onSubmit = (values: FormValues): void => {
+    mutate(values);
+  };
+
+  return { isLoading, isError, isSuccess, error, onSubmit };
 }
 
 export default useLogin;
