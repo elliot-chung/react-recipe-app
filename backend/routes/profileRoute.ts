@@ -1,5 +1,5 @@
 import express from "express";
-import { checkToken } from "../controllers/authController";
+import { checkToken } from "../controllers/profileController";
 
 const router = express.Router();
 

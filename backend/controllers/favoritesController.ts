@@ -43,7 +43,6 @@ export async function getFavorites(req: Request, res: Response) {
   res.status(200).send(lists);
 }
 
-// Request should contain a single recipe id and a list of favoritelist ids
 export async function addFavorite(req: Request, res: Response) {
   if (checkInvalidUser(req, res)) return;
   const userId: string = req.user?.id || "";

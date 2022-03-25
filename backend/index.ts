@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 import auth from "./middleware/auth";
 
-import authRoutes from "./routes/authRoute";
+import profileRoutes from "./routes/profileRoute";
 import userRoutes from "./routes/usersRoute";
 import favoritesRoutes from "./routes/favoritesRoute";
 import spoonacularRoutes from "./routes/spoonacularRoute";
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRoutes);
 app.use("/spoonacular", spoonacularRoutes);
-app.use("/auth", auth, authRoutes);
+app.use("/profile", auth, profileRoutes);
 app.use("/favorites", auth, favoritesRoutes);
 
 const PORT = process.env.PORT;
