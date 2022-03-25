@@ -1,6 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import jwt_decode from "jwt-decode";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
+import UserObj from "../sharedtypes/UserObj";
+
+const endpoint = import.meta.env.VITE_GET_USER_PROFILE_ENDPOINT || "";
+if (!endpoint) throw Error("VITE_GET_USER_PROFILE_ENDPOINT is not set");
 
 function checkAuth() {
   const config: AxiosRequestConfig = {
@@ -8,7 +13,7 @@ function checkAuth() {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    url: "http://localhost:5000/auth/check",
+    url: endpoint,
   };
   return axios(config);
 }
@@ -25,7 +30,7 @@ function useAuth() {
   const { isError, isSuccess, data } = useQuery(
     ["token_check", token],
     checkAuth,
-    { enabled: !!token }
+    { enabled: !isLoggedIn }
   );
 
   useEffect(() => {
@@ -43,7 +48,15 @@ function useAuth() {
   const loginObj = useMemo(
     () => ({
       isLoggedIn,
-      login: () => setIsLoggedIn(true),
+      login: (loginToken: string) => {
+        const decodedUser = jwt_decode<UserObj>(loginToken);
+        setIsLoggedIn(true);
+        setUser({
+          name: decodedUser.name,
+          email: decodedUser.email,
+        });
+        localStorage.setItem("token", loginToken);
+      },
       logout: () => {
         setIsLoggedIn(false);
         localStorage.removeItem("token");

@@ -6,12 +6,15 @@ interface SpoonacularSearchParams {
   query: string;
 }
 
+const endpoint = import.meta.env.VITE_SPOONACULAR_SEARCH_ENDPOINT || "";
+if (!endpoint) throw Error("No Endpoint for searching provided in .env file");
+
 async function spoonacularSearch(
   spoonacularSearchParams: SpoonacularSearchParams
 ) {
   const config: AxiosRequestConfig = {
     method: "GET",
-    url: "http://localhost:5000/spoonacular/search",
+    url: endpoint,
     params: spoonacularSearchParams,
   };
   return axios(config);

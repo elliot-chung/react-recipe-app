@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import FormValues from "../sharedtypes/RegisterFormValues";
@@ -7,8 +7,13 @@ const endpoint = import.meta.env.VITE_ADD_USER_ENDPOINT || "";
 if (!endpoint)
   throw Error("No Endpoint for adding users provided in .env file");
 
-function postUser(values: FormValues) {
-  return axios.put(endpoint, values);
+async function postUser(values: FormValues) {
+  const config: AxiosRequestConfig = {
+    method: "PUT",
+    url: endpoint,
+    data: values,
+  };
+  return axios(config);
 }
 
 function useSignup() {

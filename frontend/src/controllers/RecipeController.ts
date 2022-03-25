@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
+const endpoint = import.meta.env.VITE_SPOONACULAR_RECIPE_ENDPOINT || "";
+if (!endpoint) throw Error("No Endpoint for recipes provided in .env file");
+
 async function fetchRecipe(id: number) {
   const config: AxiosRequestConfig = {
     method: "GET",
-    url: `http://localhost:5000/spoonacular/getRecipeInfo/${id}`,
+    url: `${endpoint}/${id}`,
   };
   return axios(config);
 }

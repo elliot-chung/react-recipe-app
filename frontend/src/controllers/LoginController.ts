@@ -1,16 +1,17 @@
 import { useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { useMutation } from "react-query";
 import LoginContext from "../contexts/LoginContext";
 import FormValues from "../sharedtypes/LoginFormValues";
-import UserObj from "../sharedtypes/UserObj";
+
+const endpoint = import.meta.env.VITE_LOGIN_USER_ENDPOINT || "";
+if (!endpoint) throw Error("No Endpoint for logging in provided in .env file");
 
 async function loginUser(values: FormValues): Promise<AxiosResponse> {
   const config: AxiosRequestConfig = {
     method: "post",
-    url: "http://localhost:5000/users/loginUser",
+    url: endpoint,
     data: values,
   };
 
@@ -18,28 +19,22 @@ async function loginUser(values: FormValues): Promise<AxiosResponse> {
 }
 
 function useLogin() {
-  const { login, setUser } = useContext(LoginContext);
+  const { login } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  const storeUserToken = useCallback(
+  const onSuccess = useCallback(
     (response: AxiosResponse) => {
       const { token } = response.data;
-      localStorage.setItem("token", token);
-      const user = jwt_decode<UserObj>(token);
-      setUser({
-        name: user.name,
-        email: user.email,
-      });
-      login();
+      login(token);
       navigate("/");
     },
-    [login, navigate, setUser]
+    [login, navigate]
   );
 
   const { isLoading, isError, isSuccess, error, mutate } = useMutation(
     loginUser,
     {
-      onSuccess: storeUserToken,
+      onSuccess,
     }
   );
 
