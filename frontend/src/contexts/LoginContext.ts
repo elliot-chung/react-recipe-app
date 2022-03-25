@@ -3,7 +3,7 @@ import UserObj from "../sharedtypes/UserObj";
 
 type LoginContextType = {
   isLoggedIn: boolean;
-  login: () => void;
+  login: (token: string) => void;
   logout: () => void;
   user: UserObj;
   setUser: (user: UserObj) => void;
