@@ -11,12 +11,8 @@ async function spoonacularSearch(
 ) {
   const config: AxiosRequestConfig = {
     method: "GET",
-    url: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search",
-    params: spoonacularSearchParams,
-    headers: {
-      "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-      "x-rapidapi-key": "d5e8143e99mshb9d72b1c917c629p155d7bjsneb54fc534731",
-    },
+    url: "http://localhost:5000/spoonacular/search",
+    data: spoonacularSearchParams,
   };
   return axios(config);
 }

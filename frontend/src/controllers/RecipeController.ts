@@ -3,14 +3,15 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
-async function fetchRecipe(id: number) {
+interface RequestObject {
+  id: number;
+}
+
+async function fetchRecipe(data: RequestObject) {
   const config: AxiosRequestConfig = {
     method: "GET",
-    url: `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`,
-    headers: {
-      "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-      "x-rapidapi-key": "d5e8143e99mshb9d72b1c917c629p155d7bjsneb54fc534731",
-    },
+    url: "http://localhost:5000/spoonacular/getRecipeInfo",
+    data,
   };
   return axios(config);
 }
@@ -28,7 +29,7 @@ function useRecipe() {
   const [showModal, setShowModal] = useState(false);
   const { pageId } = useParams();
   const { data, isError, isSuccess } = useQuery(["recipe", pageId], () =>
-    fetchRecipe(Number(pageId))
+    fetchRecipe({ id: Number(pageId) })
   );
 
   if (isSuccess) {
