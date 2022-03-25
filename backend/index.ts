@@ -8,6 +8,9 @@ import auth from "./middleware/auth";
 import authRoutes from "./routes/authRoute";
 import userRoutes from "./routes/usersRoute";
 import favoritesRoutes from "./routes/favoritesRoute";
+import spoonacularRoutes from "./routes/spoonacularRoute";
+
+import {} from "./environment";
 
 dotenv.config();
 
@@ -28,6 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", userRoutes);
+app.use("/spoonacular", spoonacularRoutes);
 app.use("/auth", auth, authRoutes);
 app.use("/favorites", auth, favoritesRoutes);
 
