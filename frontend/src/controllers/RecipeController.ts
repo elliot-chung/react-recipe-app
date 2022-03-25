@@ -3,15 +3,10 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
-interface RequestObject {
-  id: number;
-}
-
-async function fetchRecipe(data: RequestObject) {
+async function fetchRecipe(id: number) {
   const config: AxiosRequestConfig = {
     method: "GET",
-    url: "http://localhost:5000/spoonacular/getRecipeInfo",
-    data,
+    url: `http://localhost:5000/spoonacular/getRecipeInfo/${id}`,
   };
   return axios(config);
 }
@@ -29,7 +24,7 @@ function useRecipe() {
   const [showModal, setShowModal] = useState(false);
   const { pageId } = useParams();
   const { data, isError, isSuccess } = useQuery(["recipe", pageId], () =>
-    fetchRecipe({ id: Number(pageId) })
+    fetchRecipe(Number(pageId))
   );
 
   if (isSuccess) {

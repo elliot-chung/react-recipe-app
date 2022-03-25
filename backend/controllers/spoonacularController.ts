@@ -33,17 +33,18 @@ async function spoonacularRecipeInfo(id: number) {
 }
 
 export async function simpleSearch(req: Request, res: Response) {
-  console.log(req.body.query);
+  const query = req.query.query?.toString() || "";
+  if (!query) return res.status(400).send("Query not found");
   const searchParams: SpoonacularSearchParams = {
-    query: req.body.query,
+    query,
   };
   const response = await spoonacularSearch(searchParams);
   res.status(response.status).send(response.data);
 }
 
 export async function getRecipeInfo(req: Request, res: Response) {
-  console.log(req.body);
-  const id = req.body.id;
+  const id = Number(req.params.id);
+  if (!id) return res.status(400).send("Id not found");
   const response = await spoonacularRecipeInfo(id);
   res.status(response.status).send(response.data);
 }

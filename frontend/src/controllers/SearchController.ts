@@ -12,7 +12,7 @@ async function spoonacularSearch(
   const config: AxiosRequestConfig = {
     method: "GET",
     url: "http://localhost:5000/spoonacular/search",
-    data: spoonacularSearchParams,
+    params: spoonacularSearchParams,
   };
   return axios(config);
 }

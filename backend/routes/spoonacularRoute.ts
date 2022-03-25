@@ -7,6 +7,6 @@ import {
 const router = express.Router();
 
 router.get("/search", simpleSearch);
-router.get("/getRecipeInfo", getRecipeInfo);
+router.get("/getRecipeInfo/:id", getRecipeInfo);
 
 export default router;
