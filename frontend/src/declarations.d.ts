@@ -56,4 +56,16 @@ declare module "*.graphql";
 declare module "*.gql";
 declare module "*.mdx";
 declare module "*.md";
-declare module "*.json
+declare module "*.json";
+
+interface ImportMetaEnv {
+  readonly VITE_ADD_USER_ENDPOINT: string;
+  readonly VITE_LOGIN_USER_ENDPOINT: string;
+  readonly VITE_GET_USER_PROFILE_ENDPOINT: string;
+  readonly VITE_SPOONACULAR_SEARCH_ENDPOINT: string;
+  readonly VITE_SPOONACULAR_RECIPE_ENDPOINT: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
