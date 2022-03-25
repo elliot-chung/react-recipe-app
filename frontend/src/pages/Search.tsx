@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import React from "react";
 import RecipeCard from "../components/RecipeCard";
 import useSearch from "../controllers/SearchController";
@@ -18,7 +19,7 @@ function Search(): JSX.Element {
   return (
     <main>
       <h1>Showing results for: {query}</h1>
-      {isError && <p>Error: {error}</p>}
+      {isError && <p>Error: {(error as AxiosError).message}</p>}
       {isLoading && <p>Loading...</p>}
       {isSuccess &&
         data?.data.results.map((item: SearchResult) => (
