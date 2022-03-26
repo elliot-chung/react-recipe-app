@@ -4,6 +4,7 @@ import FavoriteModal from "../components/FavoriteModal";
 import RecipeInstructions from "../components/RecipeInstructions";
 import RecipeSideBar from "../components/RecipeSideBar";
 import useRecipe from "../controllers/RecipeController";
+import ListItem from "../sharedtypes/ListItem";
 import StyledRecipePage from "../styles/Recipe.style";
 
 function Recipe(): JSX.Element {
@@ -24,10 +25,17 @@ function Recipe(): JSX.Element {
 
   if (isError) return <Navigate to="/error" />;
 
+  const recipe: ListItem = {
+    title,
+    imageUrl: imgUrl,
+    recipeId: id,
+    timeOfFavorite: new Date(),
+  };
+
   return (
     <StyledRecipePage>
       <FavoriteModal
-        recipeId={id}
+        recipe={recipe}
         setFavoriteState={setFavoriteState}
         showModal={showModal}
         setShowModal={setShowModal}
