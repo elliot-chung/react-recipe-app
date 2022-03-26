@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
@@ -15,14 +15,6 @@ async function fetchRecipe(id: number) {
 }
 
 function useRecipe() {
-  let id = 0;
-  let title = "";
-  let imgUrl = "";
-  let readyInMinutes = 0;
-  let servings = 0;
-  let sourceUrl = "";
-  let instructions = "";
-
   const [favoriteState, setFavoriteState] = useState("loading");
   const [showModal, setShowModal] = useState(false);
   const { pageId } = useParams();
@@ -30,24 +22,53 @@ function useRecipe() {
     fetchRecipe(Number(pageId))
   );
 
-  if (isSuccess) {
-    id = data?.data?.id || 0;
-    title = data?.data?.title || "Title Not Found";
-    imgUrl = data?.data?.image || "";
-    readyInMinutes = data?.data?.readyInMinutes || 0;
-    servings = data?.data?.servings || 0;
-    sourceUrl = data?.data?.sourceUrl || "No Source Found";
-    instructions = data?.data?.instructions || "No Instructions Found";
-  }
+  const modalKey = `modal_${Date.now()}`;
+
+  const output = useMemo(() => {
+    if (isSuccess)
+      return {
+        id: data?.data?.id || 0,
+        title: data?.data?.title || "Title Not Found",
+        imgUrl: data?.data?.image || "",
+        readyInMinutes: data?.data?.readyInMinutes || 0,
+        servings: data?.data?.servings || 0,
+        sourceUrl: data?.data?.sourceUrl || "No Source Found",
+        instructions: data?.data?.instructions || "No Instructions Found",
+      };
+    if (isError)
+      return {
+        id: 0,
+        title: "Error: Title Not Found",
+        imgUrl: "",
+        readyInMinutes: 0,
+        servings: 0,
+        sourceUrl: "Error: No Source Found",
+        instructions: "Error: No Instructions Found",
+      };
+    return {
+      id: 0,
+      title: "Loading...",
+      imgUrl: "",
+      readyInMinutes: 0,
+      servings: 0,
+      sourceUrl: "Loading...",
+      instructions: "Loading...",
+    };
+  }, [
+    data?.data?.id,
+    data?.data?.image,
+    data?.data?.instructions,
+    data?.data?.readyInMinutes,
+    data?.data?.servings,
+    data?.data?.sourceUrl,
+    data?.data?.title,
+    isError,
+    isSuccess,
+  ]);
 
   return {
-    id,
-    title,
-    imgUrl,
-    readyInMinutes,
-    servings,
-    sourceUrl,
-    instructions,
+    ...output,
+    modalKey,
     isError,
     favoriteState,
     setFavoriteState,
