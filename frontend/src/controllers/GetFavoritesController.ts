@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { useQuery } from "react-query";
 import LoginContext from "../contexts/LoginContext";
 
@@ -19,7 +19,7 @@ async function getFavorites(token: string) {
 
 function useGetFavorite() {
   const { isLoggedIn } = useContext(LoginContext);
-  const token = localStorage.getItem("token") || "";
+  const token = useMemo(() => localStorage.getItem("token") || "", []);
   const output = useQuery(["get_favorites", token], () => getFavorites(token), {
     enabled: isLoggedIn,
   });

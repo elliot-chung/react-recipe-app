@@ -25,7 +25,7 @@ function useAuth() {
     email: "",
   });
 
-  const token = localStorage.getItem("token");
+  const token = useMemo(() => localStorage.getItem("token"), []);
 
   const { isError, isSuccess, data } = useQuery(
     ["token_check", token],

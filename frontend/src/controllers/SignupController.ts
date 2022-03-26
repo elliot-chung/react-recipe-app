@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { useCallback } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import FormValues from "../sharedtypes/RegisterFormValues";
@@ -24,9 +25,12 @@ function useSignup() {
     },
   });
 
-  const onSubmit = (values: FormValues): void => {
-    mutate(values);
-  };
+  const onSubmit = useCallback(
+    (values: FormValues): void => {
+      mutate(values);
+    },
+    [mutate]
+  );
 
   return { onSubmit, isLoading, isError, error };
 }

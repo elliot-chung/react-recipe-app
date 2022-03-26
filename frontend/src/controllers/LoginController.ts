@@ -38,9 +38,12 @@ function useLogin() {
     }
   );
 
-  const onSubmit = (values: FormValues): void => {
-    mutate(values);
-  };
+  const onSubmit = useCallback(
+    (values: FormValues): void => {
+      mutate(values);
+    },
+    [mutate]
+  );
 
   return { isLoading, isError, isSuccess, error, onSubmit };
 }

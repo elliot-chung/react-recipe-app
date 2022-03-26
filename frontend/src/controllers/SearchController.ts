@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { useMemo } from "react";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 
@@ -22,14 +23,14 @@ async function spoonacularSearch(
 
 function useSearch() {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("query") || "";
+  const spoonacularSearchParams: SpoonacularSearchParams = useMemo(
+    () => ({ query: searchParams.get("query") || "" }),
+    [searchParams]
+  );
 
-  const spoonacularSearchParams: SpoonacularSearchParams = {
-    query,
-  };
-
-  const reactQueryObj = useQuery(["search", query], () =>
-    spoonacularSearch(spoonacularSearchParams)
+  const reactQueryObj = useQuery(
+    ["search", spoonacularSearchParams.query],
+    () => spoonacularSearch(spoonacularSearchParams)
   );
 
   return {
