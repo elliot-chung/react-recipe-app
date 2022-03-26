@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React from "react";
+import React, { useMemo } from "react";
 import StyledRecipeInstructions from "../styles/RecipeInstructions.style";
 
 type RecipeInstructionsProps = {
@@ -7,27 +7,27 @@ type RecipeInstructionsProps = {
 };
 
 function RecipeInstructions({ instructions }: RecipeInstructionsProps) {
-  if (instructions === "No Instructions Found") {
-    return (
-      <StyledRecipeInstructions>
-        <h3>Instructions</h3>
-        <p>{instructions}</p>
-      </StyledRecipeInstructions>
+  const sanitizedArray = useMemo(() => {
+    if (instructions === "No Instructions Found") return [];
+    const removedHeader = instructions.replace(/^[Ii]nstruction\S*\s+/, "");
+    const instructionsArray = removedHeader.split(/\.(?:\)|(?:\s+\())*/);
+    return instructionsArray.filter(
+      (item: string) => item !== "" && item.match(/^\d+$/) === null
     );
-  }
-  const removedHeader = instructions.replace(/^[Ii]nstruction\S*\s+/, "");
-  const instructionsArray = removedHeader.split(/\.(?:\)|(?:\s+\())*/);
-  const sanitizedArray = instructionsArray.filter(
-    (item: string) => item !== "" && item.match(/^\d+$/) === null
-  );
+  }, [instructions]);
+
   return (
     <StyledRecipeInstructions>
       <h3>Instructions</h3>
-      <ol>
-        {sanitizedArray.map((instruction, index) => (
-          <li key={`istep${index}`}>{instruction}</li>
-        ))}
-      </ol>
+      {!sanitizedArray || sanitizedArray.length === 0 ? (
+        <p>No Instructions Found</p>
+      ) : (
+        <ol>
+          {sanitizedArray.map((instruction, index) => (
+            <li key={`istep${index}`}>{instruction}</li>
+          ))}
+        </ol>
+      )}
     </StyledRecipeInstructions>
   );
 }

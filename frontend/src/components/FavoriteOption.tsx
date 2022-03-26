@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 type FavoriteOptionProps = {
   id: string;
@@ -24,17 +24,17 @@ function FavoriteOption({
     }
   }, [id, onSelect, name]);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (alreadyFavorite) return;
     setSelected(!selected);
     if (selected) onDeselect(id);
     else onSelect(id);
-  };
+  }, [alreadyFavorite, id, onDeselect, onSelect, selected]);
 
-  const remove = () => {
+  const remove = useCallback(() => {
     onDeselect(name);
     setShowing(false);
-  };
+  }, [name, onDeselect]);
 
   return showing ? (
     <div

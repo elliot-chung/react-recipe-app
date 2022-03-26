@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ExistingList from "../sharedtypes/ExistingList";
 import AddFavoriteOptionButton from "./AddFavoriteOptionButton";
 import FavoriteOption from "./FavoriteOption";
@@ -18,39 +18,54 @@ function FavoriteRecipeInterface({
   const [nameArray, setNameArray] = useState<string[]>([]);
   const [newLists, setNewLists] = useState<JSX.Element[]>([]);
 
-  const selectExisting = (id: string) => {
-    setIdArray(idArray.concat(id));
-  };
+  const selectExisting = useCallback(
+    (id: string) => {
+      setIdArray(idArray.concat(id));
+    },
+    [idArray]
+  );
 
-  const selectNew = (name: string) => {
-    setNameArray(nameArray.concat(name));
-  };
+  const selectNew = useCallback(
+    (name: string) => {
+      setNameArray(nameArray.concat(name));
+    },
+    [nameArray]
+  );
 
-  const deselectExisting = (id: string) => {
-    setIdArray(idArray.filter(item => item !== id));
-  };
+  const deselectExisting = useCallback(
+    (id: string) => {
+      setIdArray(idArray.filter(item => item !== id));
+    },
+    [idArray]
+  );
 
-  const deselectNew = (name: string) => {
-    setNameArray(nameArray.filter(item => item !== name));
-  };
+  const deselectNew = useCallback(
+    (name: string) => {
+      setNameArray(nameArray.filter(item => item !== name));
+    },
+    [nameArray]
+  );
 
-  const createNewList = (name: string) => {
-    const newList = (
-      <FavoriteOption
-        key={`${Date.now()}${name}`}
-        id=""
-        name={name}
-        alreadyFavorite
-        onSelect={selectNew}
-        onDeselect={deselectNew}
-      />
-    );
-    setNewLists(newLists.concat(newList));
-  };
+  const createNewList = useCallback(
+    (name: string) => {
+      const newList = (
+        <FavoriteOption
+          key={`${Date.now()}${name}`}
+          id=""
+          name={name}
+          alreadyFavorite
+          onSelect={selectNew}
+          onDeselect={deselectNew}
+        />
+      );
+      setNewLists(newLists.concat(newList));
+    },
+    [newLists, selectNew, deselectNew]
+  );
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     onSubmit(idArray, nameArray);
-  };
+  }, [idArray, nameArray, onSubmit]);
 
   return (
     <>

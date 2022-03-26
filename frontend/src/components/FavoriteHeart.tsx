@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 type FavoriteHeartProps = {
   favoriteState: string;
@@ -10,7 +10,7 @@ function FavoriteHeart({ favoriteState, setShowModal }: FavoriteHeartProps) {
   const isFavorite = favoriteState === "favorite";
   const isNotFavorite = favoriteState === "notFavorite";
 
-  const handleClick = () => setShowModal(true);
+  const handleClick = useCallback(() => setShowModal(true), [setShowModal]);
 
   return (
     <button type="button" disabled={loading} onClick={handleClick}>

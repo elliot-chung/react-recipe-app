@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
 type AddFavoriteOptionButtonProps = {
   createNewList: (name: string) => void;
@@ -10,23 +10,29 @@ function AddFavoriteOptionButton({
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const addNewList = () => {
+  const addNewList = useCallback(() => {
     setEditing(true);
-  };
+  }, []);
 
-  const saveNewList = (e: React.SyntheticEvent): void => {
-    e.preventDefault();
-    if (inputRef.current && inputRef.current.value) {
-      createNewList(inputRef.current.value);
-      setEditing(false);
-    }
-  };
+  const saveNewList = useCallback(
+    (e: React.SyntheticEvent): void => {
+      e.preventDefault();
+      if (inputRef.current && inputRef.current.value) {
+        createNewList(inputRef.current.value);
+        setEditing(false);
+      }
+    },
+    [createNewList]
+  );
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === "Enter") {
-      saveNewList(e);
-    }
-  };
+  const handleKeyPress = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>): void => {
+      if (e.key === "Enter") {
+        saveNewList(e);
+      }
+    },
+    [saveNewList]
+  );
 
   return (
     <div>
