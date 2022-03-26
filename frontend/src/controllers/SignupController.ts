@@ -18,14 +18,11 @@ async function postUser(values: FormValues) {
 
 function useSignup() {
   const navigate = useNavigate();
-  const { mutate, isLoading, isError, error } = useMutation(
-    (values: FormValues) => postUser(values),
-    {
-      onSuccess: () => {
-        navigate("/login");
-      },
-    }
-  );
+  const { mutate, isLoading, isError, error } = useMutation(postUser, {
+    onSuccess: () => {
+      navigate("/login");
+    },
+  });
 
   const onSubmit = (values: FormValues): void => {
     mutate(values);
