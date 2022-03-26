@@ -7,7 +7,7 @@ import UserObj from "../sharedtypes/UserObj";
 const endpoint = import.meta.env.VITE_GET_USER_PROFILE_ENDPOINT || "";
 if (!endpoint) throw Error("VITE_GET_USER_PROFILE_ENDPOINT is not set");
 
-function checkAuth() {
+async function checkAuth() {
   const config: AxiosRequestConfig = {
     method: "get",
     headers: {
@@ -30,7 +30,7 @@ function useAuth() {
   const { isError, isSuccess, data } = useQuery(
     ["token_check", token],
     checkAuth,
-    { enabled: !isLoggedIn }
+    { enabled: !isLoggedIn && !!token }
   );
 
   useEffect(() => {
