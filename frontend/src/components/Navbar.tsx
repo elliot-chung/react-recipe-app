@@ -9,8 +9,7 @@ interface NavbarProps {
 }
 
 function Navbar({ setEnableDarkMode }: NavbarProps): JSX.Element {
-  const userStates = useContext(LoginContext);
-  const { user, isLoggedIn, logout } = userStates;
+  const { user, isLoggedIn, logout } = useContext(LoginContext);
   const handleClick = useCallback(
     () => setEnableDarkMode(prev => !prev),
     [setEnableDarkMode]
