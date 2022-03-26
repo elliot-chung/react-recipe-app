@@ -8,7 +8,7 @@ interface tokenObject {
 
 function auth(req: Request, res: Response, next: NextFunction) {
   const token = req.get("Authorization")?.split(" ")[1];
-  if (!token) return res.status(401);
+  if (!token) return res.status(401).send("Access denied. No token provided.");
 
   try {
     const decoded = jwt.verify(
@@ -18,7 +18,7 @@ function auth(req: Request, res: Response, next: NextFunction) {
     req.user = { name: decoded.name, email: decoded.email, id: decoded.id };
     next();
   } catch (error) {
-    next(error);
+    res.status(401).send("Invalid token");
   }
 }
 
