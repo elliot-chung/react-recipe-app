@@ -22,12 +22,15 @@ async function addRecipetoList(userId: string, recipe: Recipe, listId: string) {
 }
 
 async function addEmptyListDB(userId: string, listName: string) {
-  const user = await User.findById(userId);
-  const list = await FavoriteList.create({
+  const userPromise = User.findById(userId);
+  const listPromise = FavoriteList.create({
     listName: listName,
     userId: userId,
     listItems: [],
   });
+  const promiseList = await Promise.all([userPromise, listPromise]);
+  const user = promiseList[0];
+  const list = promiseList[1];
   user.favorites.push(list._id);
   await user.save();
   return list;
@@ -45,6 +48,9 @@ export async function getFavorites(req: Request, res: Response) {
 
 export async function addFavorite(req: Request, res: Response) {
   if (checkInvalidUser(req, res)) return;
+
+  console.log(req.body);
+
   const userId: string = req.user?.id || "";
   const recipe: Recipe = req.body.recipe;
   const listIds: [string] = req.body.listIds;
@@ -56,7 +62,7 @@ export async function addFavorite(req: Request, res: Response) {
     try {
       return addEmptyListDB(userId, listName);
     } catch (error) {
-      return res.status(500).send("Error creating list");
+      return;
     }
   });
 
@@ -71,7 +77,7 @@ export async function addFavorite(req: Request, res: Response) {
     try {
       return addRecipetoList(userId, recipe, listId);
     } catch {
-      return res.status(500).send("Error adding recipe to list");
+      return;
     }
   });
 
