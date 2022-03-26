@@ -49,8 +49,6 @@ export async function getFavorites(req: Request, res: Response) {
 export async function addFavorite(req: Request, res: Response) {
   if (checkInvalidUser(req, res)) return;
 
-  console.log(req.body);
-
   const userId: string = req.user?.id || "";
   const recipe: Recipe = req.body.recipe;
   const listIds: [string] = req.body.listIds;
