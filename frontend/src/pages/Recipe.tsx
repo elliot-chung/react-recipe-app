@@ -19,6 +19,7 @@ function Recipe(): JSX.Element {
     instructions,
     favoriteState,
     setFavoriteState,
+    modalKey,
     showModal,
     setShowModal,
   } = useRecipe();
@@ -35,6 +36,7 @@ function Recipe(): JSX.Element {
   return (
     <StyledRecipePage>
       <FavoriteModal
+        key={modalKey}
         recipe={recipe}
         setFavoriteState={setFavoriteState}
         showModal={showModal}

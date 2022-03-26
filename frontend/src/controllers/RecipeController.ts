@@ -22,8 +22,6 @@ function useRecipe() {
     fetchRecipe(Number(pageId))
   );
 
-  const modalKey = `modal_${Date.now()}`;
-
   const output = useMemo(() => {
     if (isSuccess)
       return {
@@ -65,6 +63,11 @@ function useRecipe() {
     isError,
     isSuccess,
   ]);
+
+  const modalKey = useMemo(
+    () => `${showModal}_${Date.now()}` as string,
+    [showModal]
+  );
 
   return {
     ...output,
