@@ -8,6 +8,7 @@ function AddFavoriteOptionButton({
   createNewList,
 }: AddFavoriteOptionButtonProps) {
   const [editing, setEditing] = useState(false);
+  const [duplicateName, setDuplicateName] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const addNewList = useCallback(() => {
@@ -18,8 +19,13 @@ function AddFavoriteOptionButton({
     (e: React.SyntheticEvent): void => {
       e.preventDefault();
       if (inputRef.current && inputRef.current.value) {
-        createNewList(inputRef.current.value);
-        setEditing(false);
+        try {
+          createNewList(inputRef.current.value);
+          setDuplicateName(false);
+          setEditing(false);
+        } catch (error) {
+          setDuplicateName(true);
+        }
       }
     },
     [createNewList]
@@ -47,6 +53,7 @@ function AddFavoriteOptionButton({
           <button type="button" onClick={saveNewList}>
             Save
           </button>
+          {duplicateName && <p>List name already exists</p>}
         </form>
       ) : (
         <button type="button" onClick={addNewList}>

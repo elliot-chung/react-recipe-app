@@ -48,11 +48,16 @@ function FavoriteRecipeInterface({
 
   const createNewList = useCallback(
     (name: string) => {
+      const sanitizedName = name.trim();
+      const duplicateListName =
+        existingLists.some(list => list.name === sanitizedName) ||
+        nameArray.includes(sanitizedName);
+      if (duplicateListName) throw Error("Duplicate List Name");
       const newList = (
         <FavoriteOption
-          key={`${Date.now()}${name}`}
+          key={`${Date.now()}${sanitizedName}`}
           id=""
-          name={name}
+          name={sanitizedName}
           alreadyFavorite
           onSelect={selectNew}
           onDeselect={deselectNew}
@@ -60,7 +65,7 @@ function FavoriteRecipeInterface({
       );
       setNewLists(newLists.concat(newList));
     },
-    [newLists, selectNew, deselectNew]
+    [existingLists, nameArray, selectNew, deselectNew, newLists]
   );
 
   const handleSubmit = useCallback(() => {
