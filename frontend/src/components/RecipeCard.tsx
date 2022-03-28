@@ -5,8 +5,8 @@ import StyledRecipeCard from "../styles/RecipeCard.style";
 interface RecipeCardProps {
   image: string;
   id: number;
-  readyInMinutes: number;
-  servings: number;
+  readyInMinutes?: number;
+  servings?: number;
   title: string;
 }
 
@@ -27,11 +27,16 @@ function RecipeCard({
       <img src={image} alt={title} />
       <div>
         <h5>{title}</h5>
-        <p>Ready in {readyInMinutes} minutes</p>
-        <p>Servings: {servings}</p>
+        {!!readyInMinutes && <p>Ready in {readyInMinutes} minutes</p>}
+        {!!servings && <p>Servings: {servings}</p>}
       </div>
     </StyledRecipeCard>
   );
 }
+
+RecipeCard.defaultProps = {
+  readyInMinutes: 0,
+  servings: 0,
+};
 
 export default RecipeCard;
