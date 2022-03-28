@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledRecipePage = styled.main`
   display: flex;
+  flex-direction: column;
 
   ${({ theme }) => theme.mediaQueries.mobile} {
     flex-direction: column;
