@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import React from "react";
 import RecipeCard from "../components/RecipeCard";
 import useSearch from "../controllers/SearchController";
+import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 
 interface SearchResult {
   id: number;
@@ -21,17 +22,19 @@ function Search(): JSX.Element {
       <h1>Showing results for: {query}</h1>
       {isError && <p>Error: {(error as AxiosError).message}</p>}
       {isLoading && <p>Loading...</p>}
-      {isSuccess &&
-        data?.data.results.map((item: SearchResult) => (
-          <RecipeCard
-            key={item.id}
-            id={item.id}
-            image={baseImageUri + item.image}
-            readyInMinutes={item.readyInMinutes}
-            servings={item.servings}
-            title={item.title}
-          />
-        ))}
+      <StyledRecipeCardContainer>
+        {isSuccess &&
+          data?.data.results.map((item: SearchResult) => (
+            <RecipeCard
+              key={item.id}
+              id={item.id}
+              image={baseImageUri + item.image}
+              readyInMinutes={item.readyInMinutes}
+              servings={item.servings}
+              title={item.title}
+            />
+          ))}
+      </StyledRecipeCardContainer>
     </main>
   );
 }
