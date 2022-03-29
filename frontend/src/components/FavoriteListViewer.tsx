@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FavoriteList from "../sharedtypes/FavoriteList";
+import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 import RecipeCard from "./RecipeCard";
 
@@ -19,14 +20,14 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
 
   return (
     <>
-      <div
+      <StyledFavoriteListViewer
         role="button"
         tabIndex={0}
         onClick={handleClick}
         onKeyDown={handleClick}
       >
         <h3>{listName}</h3>
-      </div>
+      </StyledFavoriteListViewer>
       <StyledRecipeCardContainer>
         {showListItems &&
           listItems.map(item => (

@@ -17,6 +17,7 @@ declare module "styled-components" {
       primaryBackground: string;
       secondaryBackground: string;
       tertiaryBackground: string;
+      highlight: string;
     };
   }
 }
@@ -37,19 +38,21 @@ const defaultVals = {
 export const lightTheme: DefaultTheme = {
   ...defaultVals,
   colors: {
-    primaryInk: "#505050",
+    primaryInk: "#000000",
     primaryBackground: "#fbfbfb",
     secondaryBackground: "#ffffff",
     tertiaryBackground: "#f4f4f4",
+    highlight: "#f7f7ff",
   },
 };
 
 export const darkTheme: DefaultTheme = {
   ...defaultVals,
   colors: {
-    primaryInk: "#ffffff",
-    primaryBackground: "#202020",
-    secondaryBackground: "#1a1a1a",
-    tertiaryBackground: "#000000",
+    primaryInk: "#DDDDDD",
+    primaryBackground: "#333333",
+    secondaryBackground: "#555555",
+    tertiaryBackground: "#111111",
+    highlight: "#22222C",
   },
 };
