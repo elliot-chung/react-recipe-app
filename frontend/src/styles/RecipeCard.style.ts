@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledRecipeCard = styled.div`
   --main-color: ${({ theme }) => theme.colors.secondaryBackground};
   --loading-color: ${({ theme }) => theme.colors.tertiaryBackground};
+  --highlight-color: ${({ theme }) => theme.colors.highlight};
   --card-size: ${({ theme }) => theme.componentSizes.recipeCardSize};
   --card-margin: calc(var(--card-size) / 30);
   --card-radius: calc(var(--card-size) / 30);
@@ -25,6 +26,10 @@ const StyledRecipeCard = styled.div`
     box-shadow: 0 var(--large-shadow-size) var(--large-shadow-size)
       rgba(0 0 0 / 25%);
     transform: scale(1.02);
+
+    div {
+      background-color: var(--highlight-color);
+    }
   }
 
   img {
