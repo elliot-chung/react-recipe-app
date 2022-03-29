@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FavoriteList from "../sharedtypes/FavoriteList";
+import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 import RecipeCard from "./RecipeCard";
 
 type FavoriteListViewerProps = {
@@ -26,15 +27,17 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
       >
         <h3>{listName}</h3>
       </div>
-      {showListItems &&
-        listItems.map(item => (
-          <RecipeCard
-            id={item.recipeId}
-            key={item.recipeId}
-            image={item.imageUrl}
-            title={item.title}
-          />
-        ))}
+      <StyledRecipeCardContainer>
+        {showListItems &&
+          listItems.map(item => (
+            <RecipeCard
+              id={item.recipeId}
+              key={`${item.recipeId}-${id}`}
+              image={item.imageUrl}
+              title={item.title}
+            />
+          ))}
+      </StyledRecipeCardContainer>
     </>
   );
 }

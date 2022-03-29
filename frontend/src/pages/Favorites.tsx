@@ -2,6 +2,7 @@ import React from "react";
 import EditModeButton from "../components/EditModeButton";
 import FavoritesInterface from "../components/FavoritesInterface";
 import useFavorite from "../controllers/FavoriteController";
+import StyledFavoritePage from "../styles/Favorite.style";
 
 function Favorites(): JSX.Element {
   const {
@@ -19,11 +20,11 @@ function Favorites(): JSX.Element {
   } = useFavorite();
 
   return (
-    <main>
+    <StyledFavoritePage>
       <h1>Favorites</h1>
       <EditModeButton editMode={editMode} setEditMode={setEditMode} />
       <FavoritesInterface />
-    </main>
+    </StyledFavoritePage>
   );
 }
 

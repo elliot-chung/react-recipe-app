@@ -169,30 +169,35 @@ const GlobalStyle = createGlobalStyle`
 
     main {
         margin-top: ${({ theme }) => theme.componentSizes.navbarHeight};
+        padding-top: 1rem;
     }
 
     /* main body padding */
     ${({ theme }) => theme.mediaQueries.mobile} {
         main {
-            padding: 1rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
         }
     }
 
     ${({ theme }) => theme.mediaQueries.tablet} {
         main {
-            padding: 2rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
         }
     }
 
     ${({ theme }) => theme.mediaQueries.desktop} {
         main {
-            padding: 3rem;
+            margin-left: 3rem;
+            margin-right: 3rem;
         }
     }
 
     ${({ theme }) => theme.mediaQueries.desktopL} {
         main {
-            padding: 4rem;
+            margin-left: 4rem;
+            margin-right: 4rem;
         }
     }
 

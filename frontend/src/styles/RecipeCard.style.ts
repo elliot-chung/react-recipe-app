@@ -44,6 +44,12 @@ const StyledRecipeCard = styled.div`
     position: absolute;
     width: 90%;
 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
     h5 {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -51,7 +57,12 @@ const StyledRecipeCard = styled.div`
       width: 100%;
     }
 
-    a,
+    h5:only-child {
+      overflow: visible;
+      white-space: normal;
+      padding-top: 3%;
+    }
+
     p {
       font-size: 12px;
     }

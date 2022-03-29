@@ -1,4 +1,5 @@
 import React from "react";
+import StyledEditModeButton from "../styles/EditModeButton.style";
 
 type EditModeButtonProps = {
   editMode: boolean;
@@ -10,9 +11,9 @@ function EditModeButton({ editMode, setEditMode }: EditModeButtonProps) {
     setEditMode(!editMode);
   };
   return (
-    <button type="button" onClick={handleClick}>
+    <StyledEditModeButton type="button" onClick={handleClick}>
       {editMode ? "Edit" : "Cancel"}
-    </button>
+    </StyledEditModeButton>
   );
 }
 
