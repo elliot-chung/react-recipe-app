@@ -22,6 +22,10 @@ const StyledRecipeCard = styled.div`
   height: var(--card-size);
   cursor: pointer;
 
+  .selected {
+    box-shadow: 0 var(--large-shadow-size) var(--large-shadow-size);
+  }
+
   &:hover {
     box-shadow: 0 var(--large-shadow-size) var(--large-shadow-size)
       rgba(0 0 0 / 25%);

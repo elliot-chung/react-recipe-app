@@ -18,6 +18,7 @@ declare module "styled-components" {
       secondaryBackground: string;
       tertiaryBackground: string;
       highlight: string;
+      glow: string;
     };
   }
 }
@@ -43,6 +44,7 @@ export const lightTheme: DefaultTheme = {
     secondaryBackground: "#ffffff",
     tertiaryBackground: "#f4f4f4",
     highlight: "#f7f7ff",
+    glow: "#add8e6ff",
   },
 };
 
@@ -54,5 +56,6 @@ export const darkTheme: DefaultTheme = {
     secondaryBackground: "#555555",
     tertiaryBackground: "#111111",
     highlight: "#22222C",
+    glow: "#ffffff40",
   },
 };
