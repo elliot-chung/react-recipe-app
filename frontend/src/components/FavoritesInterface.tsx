@@ -4,9 +4,23 @@ import useGetFavorite from "../controllers/GetFavoritesController";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import FavoriteListViewer from "./FavoriteListViewer";
 
-type FavoritesInterfaceProps = {};
+type FavoritesInterfaceProps = {
+  listId: string;
+  setListId: React.Dispatch<React.SetStateAction<string>>;
+  setSelected: React.Dispatch<React.SetStateAction<string[]>>;
+  setToDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  setToMove: React.Dispatch<React.SetStateAction<boolean>>;
+  listMode: string;
+};
 
-function FavoritesInterface({}: FavoritesInterfaceProps) {
+function FavoritesInterface({
+  listId,
+  setListId,
+  setSelected,
+  setToDelete,
+  setToMove,
+  listMode,
+}: FavoritesInterfaceProps) {
   const { data, error, isError, isLoading, isSuccess } = useGetFavorite();
 
   return (
@@ -20,12 +34,33 @@ function FavoritesInterface({}: FavoritesInterfaceProps) {
         }
         if (isSuccess) {
           return data?.data.map((list: FavoriteList) => (
-            // eslint-disable-next-line no-underscore-dangle
-            <FavoriteListViewer key={list._id} list={list} />
+            <FavoriteListViewer
+              // eslint-disable-next-line no-underscore-dangle
+              key={list._id}
+              list={list}
+              listId={listId}
+              setListId={setListId}
+              setSelected={setSelected}
+              setToDelete={setToDelete}
+              setToMove={setToMove}
+              listMode={listMode}
+            />
           ));
         }
         return null;
-      }, [data, error, isError, isLoading, isSuccess])}
+      }, [
+        data?.data,
+        error,
+        isError,
+        isLoading,
+        isSuccess,
+        listId,
+        listMode,
+        setListId,
+        setSelected,
+        setToDelete,
+        setToMove,
+      ])}
     </section>
   );
 }
