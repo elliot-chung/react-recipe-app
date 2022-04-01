@@ -12,7 +12,7 @@ function EditModeButton({ editMode, setEditMode }: EditModeButtonProps) {
   };
   return (
     <StyledEditModeButton type="button" onClick={handleClick}>
-      {editMode ? "Edit" : "Cancel"}
+      {editMode ? "Cancel" : "Edit"}
     </StyledEditModeButton>
   );
 }
