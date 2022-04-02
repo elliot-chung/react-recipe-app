@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
@@ -8,9 +8,9 @@ type FavoriteListViewerProps = {
   list: FavoriteList;
   listId: string;
   setListId: React.Dispatch<React.SetStateAction<string>>;
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelected: React.Dispatch<React.SetStateAction<number[]>>;
   setToDelete: React.Dispatch<React.SetStateAction<boolean>>;
-  setToMove: React.Dispatch<React.SetStateAction<boolean>>;
+  setListToDelete: React.Dispatch<React.SetStateAction<string>>;
   listMode: string;
 };
 
@@ -20,58 +20,48 @@ function FavoriteListViewer({
   setListId,
   setSelected,
   setToDelete,
-  setToMove,
+  setListToDelete,
   listMode,
 }: FavoriteListViewerProps) {
   // eslint-disable-next-line no-underscore-dangle
   const id = list._id;
+  const editMode = listMode === "edit";
+  const selectMode = listMode === "select" && id === listId;
   const { listItems, listName } = list;
   const [showListItems, setShowListItems] = useState(false);
 
   const handleClick = useCallback(() => {
+    if (selectMode) return;
     setShowListItems(!showListItems);
-  }, [showListItems]);
-
-  const findDBID = useCallback(
-    (recipeId: number) =>
-      // eslint-disable-next-line no-underscore-dangle
-      listItems.find(item => item.recipeId === recipeId)?._id,
-    [listItems]
-  );
+  }, [selectMode, showListItems]);
 
   const selectFn = useCallback(
     (recipeId: number) => {
-      if (listMode === "edit") {
-        const dbid = findDBID(recipeId);
-        if (!dbid) return false;
-        setSelected([dbid]);
+      if (editMode) {
+        setSelected([recipeId]);
         setListId(id);
         return true;
       }
-      if (listMode === "select" && id === listId) {
-        const dbid = findDBID(recipeId);
-        if (!dbid) return false;
-        setSelected(selected => [...selected, dbid]);
+      if (selectMode) {
+        setSelected(selected => [...selected, recipeId]);
         return true;
       }
       return false;
     },
-    [findDBID, id, listId, listMode, setListId, setSelected]
+    [editMode, id, selectMode, setListId, setSelected]
   );
 
   const deselectFn = useCallback(
     (recipeId: number) => {
-      const dbid = findDBID(recipeId);
-      if (!dbid) return true;
       setSelected(selectedArr =>
-        selectedArr.filter(selected => selected !== dbid)
+        selectedArr.filter(selected => selected !== recipeId)
       );
-      if (listMode === "edit") {
+      if (editMode) {
         setListId("");
       }
       return false;
     },
-    [findDBID, listMode, setListId, setSelected]
+    [editMode, setListId, setSelected]
   );
 
   return (
@@ -83,6 +73,28 @@ function FavoriteListViewer({
         onKeyDown={handleClick}
       >
         <h3>{listName}</h3>
+        {selectMode && (
+          <button
+            type="button"
+            onClick={event => {
+              event.stopPropagation();
+              setToDelete(true);
+            }}
+          >
+            Delete Recipes
+          </button>
+        )}
+        {editMode && (
+          <button
+            type="button"
+            onClick={event => {
+              event.stopPropagation();
+              setListToDelete(id);
+            }}
+          >
+            Delete List
+          </button>
+        )}
       </StyledFavoriteListViewer>
       <StyledRecipeCardContainer>
         {showListItems &&

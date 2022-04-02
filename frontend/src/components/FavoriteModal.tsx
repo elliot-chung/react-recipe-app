@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { AxiosError } from "axios";
-import StyledFavoriteModal from "../styles/FavoriteModal.style";
+import StyledModal from "../styles/Modal.style";
 import FavoriteRecipeInterface from "./FavoriteRecipeInterface";
 import useGetFavorite from "../controllers/GetFavoritesController";
 import useAddFavorite from "../controllers/AddFavoriteController";
@@ -70,7 +70,7 @@ function FavoriteModal({
   }, [addFavorite.isSuccess, closeModal, existingLists, setFavoriteState]);
 
   return showModal ? (
-    <StyledFavoriteModal>
+    <StyledModal>
       <div>
         <button type="button" onClick={closeModal}>
           ❌
@@ -92,7 +92,7 @@ function FavoriteModal({
           />
         )}
       </div>
-    </StyledFavoriteModal>
+    </StyledModal>
   ) : null;
 }
 

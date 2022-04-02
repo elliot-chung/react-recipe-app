@@ -7,9 +7,9 @@ import FavoriteListViewer from "./FavoriteListViewer";
 type FavoritesInterfaceProps = {
   listId: string;
   setListId: React.Dispatch<React.SetStateAction<string>>;
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelected: React.Dispatch<React.SetStateAction<number[]>>;
   setToDelete: React.Dispatch<React.SetStateAction<boolean>>;
-  setToMove: React.Dispatch<React.SetStateAction<boolean>>;
+  setListToDelete: React.Dispatch<React.SetStateAction<string>>;
   listMode: string;
 };
 
@@ -18,7 +18,7 @@ function FavoritesInterface({
   setListId,
   setSelected,
   setToDelete,
-  setToMove,
+  setListToDelete,
   listMode,
 }: FavoritesInterfaceProps) {
   const { data, error, isError, isLoading, isSuccess } = useGetFavorite();
@@ -42,7 +42,7 @@ function FavoritesInterface({
               setListId={setListId}
               setSelected={setSelected}
               setToDelete={setToDelete}
-              setToMove={setToMove}
+              setListToDelete={setListToDelete}
               listMode={listMode}
             />
           ));
@@ -57,9 +57,9 @@ function FavoritesInterface({
         listId,
         listMode,
         setListId,
+        setListToDelete,
         setSelected,
         setToDelete,
-        setToMove,
       ])}
     </section>
   );

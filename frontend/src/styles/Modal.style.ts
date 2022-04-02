@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledFavoriteModal = styled.aside`
+const StyledModal = styled.aside`
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -19,4 +19,4 @@ const StyledFavoriteModal = styled.aside`
   }
 `;
 
-export default StyledFavoriteModal;
+export default StyledModal;

@@ -85,22 +85,35 @@ export async function addFavorite(req: Request, res: Response) {
   return res.status(200).send("Added to favorites");
 }
 
-export function removeFavorites(req: Request, res: Response) {
+export async function removeFavorites(req: Request, res: Response) {
   if (checkInvalidUser(req, res)) return;
-}
-
-export function moveFavorites(req: Request, res: Response) {
-  if (checkInvalidUser(req, res)) return;
-}
-
-export function copyFavorites(req: Request, res: Response) {
-  if (checkInvalidUser(req, res)) return;
+  const userId: string = req.user?.id || "";
+  const listId: string = req.body.listId;
+  const idsToDelete: [number] = req.body.idsToDelete;
+  if (!userId || !listId || !idsToDelete)
+    return res.status(400).send("Malformed request");
+  const list = await FavoriteList.findById(listId);
+  if (!list) return res.status(404).send("List not found");
+  if (list.userId !== userId) return res.status(401).send("Unauthorized");
+  const listItems = list.listItems;
+  const newListItems = listItems.filter(
+    (item: Recipe) => !idsToDelete.includes(item.recipeId)
+  );
+  list.listItems = newListItems;
+  await list.save();
+  return res.status(200).send("Removed from favorites");
 }
 
 export function addEmptyList(req: Request, res: Response) {
   if (checkInvalidUser(req, res)) return;
 }
 
-export function removeList(req: Request, res: Response) {
+export async function removeList(req: Request, res: Response) {
   if (checkInvalidUser(req, res)) return;
+  const { listId } = req.params;
+  const list = await FavoriteList.findById(listId);
+  if (!list) return res.status(404).send("List not found");
+  if (list.userId !== req.user?.id) return res.status(401).send("Unauthorized");
+  await list.remove();
+  return res.status(200).send("Removed list");
 }

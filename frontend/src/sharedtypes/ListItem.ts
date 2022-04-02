@@ -3,6 +3,7 @@ interface ListItem {
   imageUrl: string;
   recipeId: number;
   timeOfFavorite: Date;
+  _id?: string;
 }
 
 export default ListItem;

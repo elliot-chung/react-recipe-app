@@ -1,19 +1,31 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function useFavorite() {
   const [editMode, setEditMode] = useState(false);
 
   const [listId, setListId] = useState("");
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState<number[]>([]);
 
   const [toDelete, setToDelete] = useState(false);
-  const [toMove, setToMove] = useState(false);
+  const [listToDelete, setListToDelete] = useState("");
+
+  const [interfaceKey, setInterfaceKey] = useState(Date.now());
 
   const listMode = useMemo(() => {
     if (editMode && selected.length === 0) return "edit";
     if (editMode && selected.length > 0) return "select";
     return "view";
   }, [editMode, selected]);
+
+  useEffect(() => {
+    if (!editMode) {
+      setListId("");
+      setSelected([]);
+      setToDelete(false);
+      setListToDelete("");
+      setInterfaceKey(Date.now());
+    }
+  }, [editMode]);
 
   return {
     editMode,
@@ -24,9 +36,10 @@ function useFavorite() {
     setSelected,
     toDelete,
     setToDelete,
-    toMove,
-    setToMove,
+    listToDelete,
+    setListToDelete,
     listMode,
+    interfaceKey,
   };
 }
 
