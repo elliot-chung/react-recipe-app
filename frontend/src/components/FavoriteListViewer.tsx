@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useContext } from "react";
+import FavoriteContext from "../contexts/FavoriteContext";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
@@ -6,23 +7,17 @@ import RecipeCard from "./RecipeCard";
 
 type FavoriteListViewerProps = {
   list: FavoriteList;
-  listId: string;
-  setListId: React.Dispatch<React.SetStateAction<string>>;
-  setSelected: React.Dispatch<React.SetStateAction<number[]>>;
-  setToDelete: React.Dispatch<React.SetStateAction<boolean>>;
-  setListToDelete: React.Dispatch<React.SetStateAction<string>>;
-  listMode: string;
 };
 
-function FavoriteListViewer({
-  list,
-  listId,
-  setListId,
-  setSelected,
-  setToDelete,
-  setListToDelete,
-  listMode,
-}: FavoriteListViewerProps) {
+function FavoriteListViewer({ list }: FavoriteListViewerProps) {
+  const {
+    listId,
+    setListId,
+    setSelected,
+    setToDelete,
+    setListToDelete,
+    listMode,
+  } = useContext(FavoriteContext);
   // eslint-disable-next-line no-underscore-dangle
   const id = list._id;
   const editMode = listMode === "edit";

@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import FavoriteContext from "../contexts/FavoriteContext";
 import StyledEditModeButton from "../styles/EditModeButton.style";
 
-type EditModeButtonProps = {
-  editMode: boolean;
-  setEditMode: (editMode: boolean) => void;
-};
-
-function EditModeButton({ editMode, setEditMode }: EditModeButtonProps) {
+function EditModeButton() {
+  const { editMode, setEditMode } = useContext(FavoriteContext);
   const handleClick = () => {
     setEditMode(!editMode);
   };

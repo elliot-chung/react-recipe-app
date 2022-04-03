@@ -1,20 +1,22 @@
 import { AxiosError } from "axios";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import FavoriteContext from "../contexts/FavoriteContext";
 import useAddFavoriteList from "../controllers/AddFavoriteListController";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 
 type FavoriteListAdderProps = {
   lists: FavoriteList[];
-  setAddFavorite: React.Dispatch<React.SetStateAction<boolean>>;
-  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function FavoriteListAdder({
-  lists,
-  setAddFavorite,
-  setEditMode,
-}: FavoriteListAdderProps) {
+function FavoriteListAdder({ lists }: FavoriteListAdderProps) {
+  const { setAddFavorite, setEditMode } = useContext(FavoriteContext);
   const { mutate, isError, isLoading, isSuccess, error } = useAddFavoriteList();
   const inputRef = useRef<HTMLInputElement>(null);
   const [duplicateName, setDuplicateName] = useState(false);

@@ -1,11 +1,9 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
+import FavoriteContext from "../contexts/FavoriteContext";
 import StyledAddListButton from "../styles/AddListButton.style";
 
-type AddListButtonProps = {
-  setAddFavorite: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function AddListButton({ setAddFavorite }: AddListButtonProps) {
+function AddListButton(): JSX.Element {
+  const { setAddFavorite } = useContext(FavoriteContext);
   const handleClick = useCallback(() => {
     setAddFavorite(true);
   }, [setAddFavorite]);

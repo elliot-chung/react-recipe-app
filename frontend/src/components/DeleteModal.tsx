@@ -1,21 +1,12 @@
 import { AxiosError } from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import FavoriteContext from "../contexts/FavoriteContext";
 import useDeleteFavorite from "../controllers/DeleteFavoriteController";
 import StyledModal from "../styles/Modal.style";
 
-type DeleteModalProps = {
-  listId: string;
-  selected: number[];
-  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-  setToDelete: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function DeleteModal({
-  listId,
-  selected,
-  setEditMode,
-  setToDelete,
-}: DeleteModalProps) {
+function DeleteModal(): JSX.Element {
+  const { listId, selected, setEditMode, setToDelete } =
+    useContext(FavoriteContext);
   const deleteData = {
     listId,
     idsToDelete: selected as [number],

@@ -1,19 +1,12 @@
+import React, { useEffect, useContext } from "react";
 import { AxiosError } from "axios";
-import React, { useEffect } from "react";
+import FavoriteContext from "../contexts/FavoriteContext";
 import useDeleteFavoriteList from "../controllers/DeleteFavoriteListController";
 import StyledModal from "../styles/Modal.style";
 
-type DeleteListModalProps = {
-  listId: string;
-  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-  setListToDelete: React.Dispatch<React.SetStateAction<string>>;
-};
-
-function DeleteListModal({
-  listId,
-  setEditMode,
-  setListToDelete,
-}: DeleteListModalProps) {
+function DeleteListModal(): JSX.Element {
+  const { listToDelete, setEditMode, setListToDelete } =
+    useContext(FavoriteContext);
   const { mutate, error, isLoading, isError, isSuccess } =
     useDeleteFavoriteList();
 
@@ -42,7 +35,7 @@ function DeleteListModal({
         <button
           type="button"
           onClick={() => {
-            mutate(listId);
+            mutate(listToDelete);
           }}
           disabled={isLoading}
         >
