@@ -6,14 +6,19 @@ import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 
 type FavoriteListAdderProps = {
   lists: FavoriteList[];
+  setAddFavorite: React.Dispatch<React.SetStateAction<boolean>>;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function FavoriteListAdder({ lists, setEditMode }: FavoriteListAdderProps) {
+function FavoriteListAdder({
+  lists,
+  setAddFavorite,
+  setEditMode,
+}: FavoriteListAdderProps) {
   const { mutate, isError, isLoading, isSuccess, error } = useAddFavoriteList();
   const inputRef = useRef<HTMLInputElement>(null);
   const [duplicateName, setDuplicateName] = useState(false);
-  const handleClick = useCallback(() => {
+  const handleSave = useCallback(() => {
     const listName = inputRef.current?.value;
     if (listName) {
       const nameExists = lists.some(list => list.listName === listName);
@@ -23,21 +28,45 @@ function FavoriteListAdder({ lists, setEditMode }: FavoriteListAdderProps) {
     }
   }, [lists, mutate]);
 
+  const handleCancel = useCallback(() => {
+    setAddFavorite(false);
+  }, [setAddFavorite]);
+
+  const handleKeyDown = useCallback(
+    event => {
+      if (event.key === "Enter") {
+        handleSave();
+      }
+    },
+    [handleSave]
+  );
+
   useEffect(() => {
     if (isSuccess) {
       setEditMode(false);
     }
   }, [isSuccess, setEditMode]);
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <StyledFavoriteListViewer>
-      <input type="text" ref={inputRef} />
+      <input
+        type="text"
+        ref={inputRef}
+        onBlur={handleCancel}
+        onKeyDown={handleKeyDown}
+      />
       {duplicateName && <p>List name already exists</p>}
       {isLoading && <p>Loading...</p>}
       {isError && <p>{(error as AxiosError).message}</p>}
-      <button type="button" onClick={handleClick}>
-        Save
-      </button>
+      <div>
+        <button type="button" onClick={handleSave}>
+          Save
+        </button>
+      </div>
     </StyledFavoriteListViewer>
   );
 }

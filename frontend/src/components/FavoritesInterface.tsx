@@ -8,6 +8,7 @@ import FavoriteListAdder from "./FavoriteListAdder";
 type FavoritesInterfaceProps = {
   listId: string;
   addFavorite: boolean;
+  setAddFavorite: React.Dispatch<React.SetStateAction<boolean>>;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   setListId: React.Dispatch<React.SetStateAction<string>>;
   setSelected: React.Dispatch<React.SetStateAction<number[]>>;
@@ -19,6 +20,7 @@ type FavoritesInterfaceProps = {
 function FavoritesInterface({
   listId,
   addFavorite,
+  setAddFavorite,
   setEditMode,
   setListId,
   setSelected,
@@ -33,7 +35,11 @@ function FavoritesInterface({
       {isLoading && <div>Loading...</div>}
       {isError && <div>{(error as AxiosError).message}</div>}
       {addFavorite && isSuccess && (
-        <FavoriteListAdder setEditMode={setEditMode} lists={data?.data} />
+        <FavoriteListAdder
+          setEditMode={setEditMode}
+          setAddFavorite={setAddFavorite}
+          lists={data?.data}
+        />
       )}
       {isSuccess &&
         data?.data.map((list: FavoriteList) => (

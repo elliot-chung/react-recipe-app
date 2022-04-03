@@ -51,6 +51,7 @@ function Favorites(): JSX.Element {
         key={interfaceKey}
         listId={listId}
         addFavorite={addFavorite}
+        setAddFavorite={setAddFavorite}
         setEditMode={setEditMode}
         setListId={setListId}
         setSelected={setSelected}
