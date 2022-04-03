@@ -104,8 +104,17 @@ export async function removeFavorites(req: Request, res: Response) {
   return res.status(200).send("Removed from favorites");
 }
 
-export function addEmptyList(req: Request, res: Response) {
+export async function addEmptyList(req: Request, res: Response) {
   if (checkInvalidUser(req, res)) return;
+  const userId: string = req.user?.id || "";
+  const listName: string = req.body.listName;
+  if (!userId || !listName) return res.status(400).send("Malformed request");
+  try {
+    await addEmptyListDB(userId, listName);
+  } catch (error) {
+    return res.status(500).send("Error creating new list");
+  }
+  return res.status(200).send("Added new list");
 }
 
 export async function removeList(req: Request, res: Response) {
@@ -116,4 +125,16 @@ export async function removeList(req: Request, res: Response) {
   if (list.userId !== req.user?.id) return res.status(401).send("Unauthorized");
   await list.remove();
   return res.status(200).send("Removed list");
+}
+
+export async function renameList(req: Request, res: Response) {
+  if (checkInvalidUser(req, res)) return;
+  const { listId } = req.params;
+  const { newName } = req.body;
+  const list = await FavoriteList.findById(listId);
+  if (!list) return res.status(404).send("List not found");
+  if (list.userId !== req.user?.id) return res.status(401).send("Unauthorized");
+  list.listName = newName;
+  await list.save();
+  return res.status(200).send("Renamed list");
 }
