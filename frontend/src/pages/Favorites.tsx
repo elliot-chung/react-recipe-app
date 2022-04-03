@@ -5,6 +5,7 @@ import DeleteModal from "../components/DeleteModal";
 import useFavorite from "../controllers/FavoriteController";
 import StyledFavoritePage from "../styles/Favorite.style";
 import DeleteListModal from "../components/DeleteListModal";
+import AddListButton from "../components/AddListButton";
 
 function Favorites(): JSX.Element {
   const {
@@ -18,6 +19,8 @@ function Favorites(): JSX.Element {
     setToDelete,
     listToDelete,
     setListToDelete,
+    addFavorite,
+    setAddFavorite,
     listMode,
     interfaceKey,
   } = useFavorite();
@@ -40,10 +43,15 @@ function Favorites(): JSX.Element {
         />
       )}
       <h1>Favorites</h1>
+      {editMode && !addFavorite && (
+        <AddListButton setAddFavorite={setAddFavorite} />
+      )}
       <EditModeButton editMode={editMode} setEditMode={setEditMode} />
       <FavoritesInterface
         key={interfaceKey}
         listId={listId}
+        addFavorite={addFavorite}
+        setEditMode={setEditMode}
         setListId={setListId}
         setSelected={setSelected}
         setToDelete={setToDelete}

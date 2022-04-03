@@ -4,6 +4,7 @@ const StyledFavoriteListViewer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 2.5rem;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   padding-left: 2rem;

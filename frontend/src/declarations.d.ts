@@ -64,6 +64,7 @@ interface ImportMetaEnv {
   readonly VITE_GET_USER_PROFILE_ENDPOINT: string;
   readonly VITE_GET_FAVORITES_ENDPOINT: string;
   readonly VITE_ADD_FAVORITE_ENDPOINT: string;
+  readonly VITE_ADD_FAVORITE_LIST_ENDPOINT: string;
   readonly VITE_REMOVE_FAVORITE_ENDPOINT: string;
   readonly VITE_REMOVE_FAVORITE_LIST_ENDPOINT: string;
   readonly VITE_SPOONACULAR_SEARCH_ENDPOINT: string;

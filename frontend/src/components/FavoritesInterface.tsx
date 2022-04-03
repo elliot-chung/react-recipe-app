@@ -1,11 +1,14 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { AxiosError } from "axios";
 import useGetFavorite from "../controllers/GetFavoritesController";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import FavoriteListViewer from "./FavoriteListViewer";
+import FavoriteListAdder from "./FavoriteListAdder";
 
 type FavoritesInterfaceProps = {
   listId: string;
+  addFavorite: boolean;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   setListId: React.Dispatch<React.SetStateAction<string>>;
   setSelected: React.Dispatch<React.SetStateAction<number[]>>;
   setToDelete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +18,8 @@ type FavoritesInterfaceProps = {
 
 function FavoritesInterface({
   listId,
+  addFavorite,
+  setEditMode,
   setListId,
   setSelected,
   setToDelete,
@@ -25,42 +30,25 @@ function FavoritesInterface({
 
   return (
     <section>
-      {useMemo(() => {
-        if (isLoading) {
-          return <div>Loading...</div>;
-        }
-        if (isError) {
-          return <div>{(error as AxiosError).message}</div>;
-        }
-        if (isSuccess) {
-          return data?.data.map((list: FavoriteList) => (
-            <FavoriteListViewer
-              // eslint-disable-next-line no-underscore-dangle
-              key={list._id}
-              list={list}
-              listId={listId}
-              setListId={setListId}
-              setSelected={setSelected}
-              setToDelete={setToDelete}
-              setListToDelete={setListToDelete}
-              listMode={listMode}
-            />
-          ));
-        }
-        return null;
-      }, [
-        data?.data,
-        error,
-        isError,
-        isLoading,
-        isSuccess,
-        listId,
-        listMode,
-        setListId,
-        setListToDelete,
-        setSelected,
-        setToDelete,
-      ])}
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>{(error as AxiosError).message}</div>}
+      {addFavorite && isSuccess && (
+        <FavoriteListAdder setEditMode={setEditMode} lists={data?.data} />
+      )}
+      {isSuccess &&
+        data?.data.map((list: FavoriteList) => (
+          <FavoriteListViewer
+            // eslint-disable-next-line no-underscore-dangle
+            key={list._id}
+            list={list}
+            listId={listId}
+            setListId={setListId}
+            setSelected={setSelected}
+            setToDelete={setToDelete}
+            setListToDelete={setListToDelete}
+            listMode={listMode}
+          />
+        ))}
     </section>
   );
 }

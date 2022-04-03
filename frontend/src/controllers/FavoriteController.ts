@@ -8,6 +8,7 @@ function useFavorite() {
 
   const [toDelete, setToDelete] = useState(false);
   const [listToDelete, setListToDelete] = useState("");
+  const [addFavorite, setAddFavorite] = useState(false);
 
   const [interfaceKey, setInterfaceKey] = useState(Date.now());
 
@@ -23,6 +24,7 @@ function useFavorite() {
       setSelected([]);
       setToDelete(false);
       setListToDelete("");
+      setAddFavorite(false);
       setInterfaceKey(Date.now());
     }
   }, [editMode]);
@@ -38,6 +40,8 @@ function useFavorite() {
     setToDelete,
     listToDelete,
     setListToDelete,
+    addFavorite,
+    setAddFavorite,
     listMode,
     interfaceKey,
   };
