@@ -17,11 +17,11 @@ async function getFavorites(token: string) {
   return axios(config);
 }
 
-function useGetFavorite() {
+function useGetFavorite(enable: boolean) {
   const { isLoggedIn } = useContext(LoginContext);
   const token = useMemo(() => localStorage.getItem("token") || "", []);
   const output = useQuery(["get_favorites", token], () => getFavorites(token), {
-    enabled: isLoggedIn,
+    enabled: isLoggedIn && enable,
   });
 
   return output;

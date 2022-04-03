@@ -1,7 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
+import FavoriteList from "../sharedtypes/FavoriteList";
+import useGetFavorite from "./GetFavoritesController";
 
 function useFavorite() {
   const [editMode, setEditMode] = useState(false);
+  const { data, error, isError, isLoading, isSuccess } = useGetFavorite(
+    !editMode
+  );
+
+  const [lists, setLists] = useState<FavoriteList[]>([]);
 
   const [listId, setListId] = useState("");
   const [selected, setSelected] = useState<number[]>([]);
@@ -27,7 +34,10 @@ function useFavorite() {
       setAddFavorite(false);
       setInterfaceKey(Date.now());
     }
-  }, [editMode]);
+    if (isSuccess) {
+      setLists(data?.data);
+    }
+  }, [data?.data, editMode, isSuccess]);
 
   return {
     editMode,
@@ -44,6 +54,11 @@ function useFavorite() {
     setAddFavorite,
     listMode,
     interfaceKey,
+    isSuccess,
+    isLoading,
+    isError,
+    error,
+    lists,
   };
 }
 

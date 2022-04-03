@@ -1,4 +1,6 @@
+import { AxiosError } from "axios";
 import { createContext } from "react";
+import FavoriteList from "../sharedtypes/FavoriteList";
 
 type FavoriteContextType = {
   editMode: boolean;
@@ -15,6 +17,11 @@ type FavoriteContextType = {
   setAddFavorite: React.Dispatch<React.SetStateAction<boolean>>;
   listMode: string;
   interfaceKey: number;
+  isSuccess: boolean;
+  isLoading: boolean;
+  isError: boolean;
+  error: AxiosError;
+  lists: FavoriteList[];
 };
 
 const FavoriteContext = createContext<FavoriteContextType>({
@@ -32,6 +39,11 @@ const FavoriteContext = createContext<FavoriteContextType>({
   setAddFavorite: () => {},
   listMode: "",
   interfaceKey: 0,
+  isSuccess: false,
+  isLoading: false,
+  isError: false,
+  error: {} as AxiosError,
+  lists: [],
 });
 
 export default FavoriteContext;

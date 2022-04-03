@@ -26,6 +26,7 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
     setToDelete,
     setListToDelete,
     listMode,
+    lists,
   } = useContext(FavoriteContext);
   const { mutate, isSuccess, isError, isLoading, error } =
     useRenameFavoriteList();
@@ -90,15 +91,18 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
         setRenameList(true);
         return;
       }
-      const newName = inputRef.current?.value;
-      if (newName && newName !== listName) {
+      const newName = inputRef.current?.value.trim();
+      const exists = lists.some(
+        existingList => existingList.listName === newName
+      );
+      if (newName && newName !== listName && !exists) {
         mutate({ listId: id, newName });
       }
       if (newName === listName) {
         setRenameList(false);
       }
     },
-    [id, listName, mutate, renameList]
+    [id, listName, lists, mutate, renameList]
   );
 
   const handleDeleteRecipes = useCallback(

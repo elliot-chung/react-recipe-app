@@ -8,20 +8,15 @@ import React, {
 } from "react";
 import FavoriteContext from "../contexts/FavoriteContext";
 import useAddFavoriteList from "../controllers/AddFavoriteListController";
-import FavoriteList from "../sharedtypes/FavoriteList";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 
-type FavoriteListAdderProps = {
-  lists: FavoriteList[];
-};
-
-function FavoriteListAdder({ lists }: FavoriteListAdderProps) {
-  const { setAddFavorite, setEditMode } = useContext(FavoriteContext);
+function FavoriteListAdder(): JSX.Element {
+  const { setAddFavorite, setEditMode, lists } = useContext(FavoriteContext);
   const { mutate, isError, isLoading, isSuccess, error } = useAddFavoriteList();
   const inputRef = useRef<HTMLInputElement>(null);
   const [duplicateName, setDuplicateName] = useState(false);
   const handleSave = useCallback(() => {
-    const listName = inputRef.current?.value;
+    const listName = inputRef.current?.value.trim();
     if (listName) {
       const nameExists = lists.some(list => list.listName === listName);
       setDuplicateName(nameExists);
