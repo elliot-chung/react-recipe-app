@@ -94,6 +94,9 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
       if (newName && newName !== listName) {
         mutate({ listId: id, newName });
       }
+      if (newName === listName) {
+        setRenameList(false);
+      }
     },
     [id, listName, mutate, renameList]
   );
