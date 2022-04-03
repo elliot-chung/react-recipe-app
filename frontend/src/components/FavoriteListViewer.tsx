@@ -114,6 +114,16 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
     [id, setListToDelete]
   );
 
+  const handleKeyDown = useCallback(
+    event => {
+      event.stopPropagation();
+      if (event.key === "Enter") {
+        handleRenameList(event);
+      }
+    },
+    [handleRenameList]
+  );
+
   useEffect((): void => {
     if (isSuccess) {
       setEditMode(false);
@@ -136,7 +146,7 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
               autoFocus
               onBlur={cancelRenameList}
               onClick={event => event.stopPropagation()}
-              onKeyDown={event => event.stopPropagation()}
+              onKeyDown={handleKeyDown}
               onChange={handleInputChange}
               ref={inputRef}
             />

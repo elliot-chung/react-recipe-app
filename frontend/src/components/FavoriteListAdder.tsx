@@ -64,7 +64,14 @@ function FavoriteListAdder({ lists }: FavoriteListAdderProps) {
       {duplicateName && <p>List name already exists</p>}
       {isLoading && <p>Loading...</p>}
       {isError && <p>{(error as AxiosError).message}</p>}
-      <button type="button" onClick={handleSave}>
+      <button
+        type="button"
+        onClick={handleSave}
+        onMouseDown={event => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+      >
         Save
       </button>
     </StyledFavoriteListViewer>
