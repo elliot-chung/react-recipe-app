@@ -62,11 +62,9 @@ function FavoriteListAdder({
       {duplicateName && <p>List name already exists</p>}
       {isLoading && <p>Loading...</p>}
       {isError && <p>{(error as AxiosError).message}</p>}
-      <div>
-        <button type="button" onClick={handleSave}>
-          Save
-        </button>
-      </div>
+      <button type="button" onClick={handleSave}>
+        Save
+      </button>
     </StyledFavoriteListViewer>
   );
 }

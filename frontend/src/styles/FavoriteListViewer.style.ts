@@ -13,6 +13,11 @@ const StyledFavoriteListViewer = styled.div`
   border-radius: 0.5rem;
   cursor: pointer;
 
+  div {
+    display: flex;
+    flex-direction: row;
+  }
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.highlight};
   }

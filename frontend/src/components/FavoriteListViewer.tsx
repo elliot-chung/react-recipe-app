@@ -72,7 +72,10 @@ function FavoriteListViewer({
         onClick={handleClick}
         onKeyDown={handleClick}
       >
-        <h3>{listName}</h3>
+        <div>
+          <h3>{listName}</h3>
+          {editMode && <button type="button">Rename</button>}
+        </div>
         {selectMode && (
           <button
             type="button"
