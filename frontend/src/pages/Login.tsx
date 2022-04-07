@@ -12,10 +12,10 @@ function Login(): JSX.Element {
 
   if (isLoggedIn) {
     return (
-      <>
+      <main>
         <h1>You are already logged in</h1>
         <Link to="/">Go to Home</Link>
-      </>
+      </main>
     );
   }
 
