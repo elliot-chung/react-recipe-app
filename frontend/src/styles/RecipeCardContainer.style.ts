@@ -6,6 +6,7 @@ const StyledRecipeCardContainer = styled.section`
 
   background-color: var(--background-color);
   display: grid;
+  grid-template-columns: 1fr;
   justify-items: center;
 
   .selected {
@@ -13,15 +14,15 @@ const StyledRecipeCardContainer = styled.section`
   }
 
   ${({ theme }) => theme.mediaQueries.mobile} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   ${({ theme }) => theme.mediaQueries.tablet} {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   ${({ theme }) => theme.mediaQueries.desktop} {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   ${({ theme }) => theme.mediaQueries.desktopL} {

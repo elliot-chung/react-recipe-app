@@ -21,7 +21,7 @@ const StyledRecipeCard = styled.div`
   margin: var(--card-margin);
   position: relative;
   transition: all 0.2s ease;
-  width: var(--card-size);
+  width: 95%;
   height: var(--card-size);
   cursor: pointer;
 
