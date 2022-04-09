@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { AxiosError } from "axios";
+import StyledModalBackground from "../styles/ModalBackground.style";
 import StyledModal from "../styles/Modal.style";
 import FavoriteRecipeInterface from "./FavoriteRecipeInterface";
 import useGetFavorite from "../controllers/GetFavoritesController";
@@ -9,6 +10,7 @@ import FavoriteList from "../sharedtypes/FavoriteList";
 import ListItem from "../sharedtypes/ListItem";
 import ExistingList from "../sharedtypes/ExistingList";
 import LoginContext from "../contexts/LoginContext";
+import RedButton from "../styles/RedButton.style";
 
 type FavoriteModalProps = {
   recipe: ListItem;
@@ -70,11 +72,11 @@ function FavoriteModal({
   }, [addFavorite.isSuccess, closeModal, existingLists, setFavoriteState]);
 
   return showModal ? (
-    <StyledModal>
-      <div>
-        <button type="button" onClick={closeModal}>
-          ❌
-        </button>
+    <StyledModalBackground>
+      <StyledModal>
+        <RedButton type="button" onClick={closeModal}>
+          X
+        </RedButton>
         {!isLoggedIn && <p>Please Log In to Add to Favorites</p>}
         {getFavorite.isLoading && <p>Loading...</p>}
         {addFavorite.isLoading && <p>Loading...</p>}
@@ -91,8 +93,8 @@ function FavoriteModal({
             loading={addFavorite.isLoading}
           />
         )}
-      </div>
-    </StyledModal>
+      </StyledModal>
+    </StyledModalBackground>
   ) : null;
 }
 

@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from "react";
 import FavoriteContext from "../contexts/FavoriteContext";
 import useDeleteFavorite from "../controllers/DeleteFavoriteController";
 import StyledButton from "../styles/Button.style";
+import StyledModalBackground from "../styles/ModalBackground.style";
 import StyledModal from "../styles/Modal.style";
 import RedButton from "../styles/RedButton.style";
 
@@ -23,8 +24,8 @@ function DeleteModal(): JSX.Element {
   }, [isSuccess, selected, setEditMode, setToDelete]);
 
   return (
-    <StyledModal>
-      <div>
+    <StyledModalBackground>
+      <StyledModal>
         <h2>Are You Sure You Want to Delete the Selected Items?</h2>
         {isLoading && <p>Loading...</p>}
         {isError && <p>Error: {(error as AxiosError).message}</p>}
@@ -46,8 +47,8 @@ function DeleteModal(): JSX.Element {
         >
           Delete
         </RedButton>
-      </div>
-    </StyledModal>
+      </StyledModal>
+    </StyledModalBackground>
   );
 }
 

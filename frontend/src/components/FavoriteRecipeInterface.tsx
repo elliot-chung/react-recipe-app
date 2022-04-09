@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from "react";
 import ExistingList from "../sharedtypes/ExistingList";
+import StyledButton from "../styles/Button.style";
+import StyledFavoriteRecipeInterface from "../styles/FavoriteRecipeInterface.style";
 import AddFavoriteOptionButton from "./AddFavoriteOptionButton";
 import FavoriteOption from "./FavoriteOption";
 
@@ -74,7 +76,7 @@ function FavoriteRecipeInterface({
 
   return (
     <>
-      <div>
+      <StyledFavoriteRecipeInterface>
         <AddFavoriteOptionButton createNewList={createNewList} />
         {newLists}
         {existingLists.map(list => (
@@ -87,10 +89,10 @@ function FavoriteRecipeInterface({
             onDeselect={deselectExisting}
           />
         ))}
-      </div>
-      <button type="button" onClick={handleSubmit} disabled={loading}>
+      </StyledFavoriteRecipeInterface>
+      <StyledButton type="button" onClick={handleSubmit} disabled={loading}>
         Submit
-      </button>
+      </StyledButton>
     </>
   );
 }
