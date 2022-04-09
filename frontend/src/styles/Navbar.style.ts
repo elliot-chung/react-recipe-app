@@ -4,6 +4,7 @@ const StyledNavbar = styled.nav`
   --navbar-height: ${({ theme }) => theme.componentSizes.navbarHeight};
   --navbar-padding: calc(var(--navbar-height) / 5);
   --navbar-color: ${({ theme }) => theme.colors.secondaryBackground};
+  --home-filter: ${({ theme }) => theme.filters.home};
 
   display: flex;
   flex-direction: row;
@@ -20,7 +21,11 @@ const StyledNavbar = styled.nav`
   height: var(--navbar-height);
   transition: all 0.2s ease;
   box-sizing: border-box;
-  overflow: hidden;
+
+  a img {
+    height: var(--navbar-height);
+    filter: var(--home-filter);
+  }
 `;
 
 export default StyledNavbar;

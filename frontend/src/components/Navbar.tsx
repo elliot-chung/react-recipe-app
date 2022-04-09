@@ -1,35 +1,29 @@
-import React, { useCallback, useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import LoginContext from "../contexts/LoginContext";
+import home from "../assets/icons/home.svg";
 import StyledNavbar from "../styles/Navbar.style";
+import ProfileMenu from "./ProfileMenu";
 import Searchbar from "./Searchbar";
 
 interface NavbarProps {
+  enableDarkMode: boolean;
   setEnableDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Navbar({ setEnableDarkMode }: NavbarProps): JSX.Element {
-  const { user, isLoggedIn, logout } = useContext(LoginContext);
-  const handleClick = useCallback(
-    () => setEnableDarkMode(prev => !prev),
-    [setEnableDarkMode]
-  );
-
+function Navbar({
+  enableDarkMode,
+  setEnableDarkMode,
+}: NavbarProps): JSX.Element {
   return (
     <StyledNavbar>
-      <Link to="/"> Home </Link>
-      <button type="button" onClick={handleClick}>
-        Toggle Theme
-      </button>
+      <Link to="/">
+        <img src={home} alt="home" />
+      </Link>
       <Searchbar />
-      {isLoggedIn && <Link to="/favorites"> {user.name} </Link>}
-      {isLoggedIn ? (
-        <button type="button" onClick={logout}>
-          Logout
-        </button>
-      ) : (
-        <Link to="/login"> Login </Link>
-      )}
+      <ProfileMenu
+        enableDarkMode={enableDarkMode}
+        setEnableDarkMode={setEnableDarkMode}
+      />
     </StyledNavbar>
   );
 }

@@ -9,6 +9,7 @@ import React, {
 import FavoriteContext from "../contexts/FavoriteContext";
 import useRenameFavoriteList from "../controllers/RenameListController";
 import FavoriteList from "../sharedtypes/FavoriteList";
+import StyledButton from "../styles/Button.style";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 import RecipeCard from "./RecipeCard";
@@ -161,7 +162,7 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
             <h3>{listName}</h3>
           )}
           {editMode && (
-            <button
+            <StyledButton
               type="button"
               onMouseDown={event => {
                 event.stopPropagation();
@@ -170,20 +171,20 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
               onClick={handleRenameList}
             >
               Rename
-            </button>
+            </StyledButton>
           )}
         </div>
         {isLoading && <p>Loading...</p>}
         {isError && <p>{(error as AxiosError).message}</p>}
         {selectMode && (
-          <button type="button" onClick={handleDeleteRecipes}>
+          <StyledButton type="button" onClick={handleDeleteRecipes}>
             Delete Recipes
-          </button>
+          </StyledButton>
         )}
         {editMode && (
-          <button type="button" onClick={handleDeleteList}>
+          <StyledButton type="button" onClick={handleDeleteList}>
             Delete List
-          </button>
+          </StyledButton>
         )}
       </StyledFavoriteListViewer>
       <StyledRecipeCardContainer>

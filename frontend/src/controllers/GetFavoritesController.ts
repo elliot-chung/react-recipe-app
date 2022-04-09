@@ -17,7 +17,7 @@ async function getFavorites(token: string) {
   return axios(config);
 }
 
-function useGetFavorite(enable: boolean) {
+function useGetFavorite(enable = true) {
   const { isLoggedIn } = useContext(LoginContext);
   const token = useMemo(() => localStorage.getItem("token") || "", []);
   const output = useQuery(["get_favorites", token], () => getFavorites(token), {

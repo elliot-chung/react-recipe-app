@@ -25,7 +25,6 @@ const FavoriteList = new mongoose.Schema(
         },
         recipeId: {
           type: Number,
-          unique: true,
           required: true,
         },
         timeOfFavorite: {

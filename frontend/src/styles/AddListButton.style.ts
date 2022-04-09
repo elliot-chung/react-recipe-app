@@ -8,7 +8,7 @@ const StyledAddListButton = styled.button`
   border-radius: 0.5rem;
   background-image: linear-gradient(
     ${({ theme }) => theme.colors.primaryBackground} 20%,
-    ${({ theme }) => theme.colors.glow} 100%
+    ${({ theme }) => theme.colors.highlight} 100%
   );
   cursor: pointer;
 
@@ -19,14 +19,14 @@ const StyledAddListButton = styled.button`
   &:hover {
     background-image: linear-gradient(
       ${({ theme }) => theme.colors.primaryBackground} 0%,
-      ${({ theme }) => theme.colors.glow} 100%
+      ${({ theme }) => theme.colors.highlight} 100%
     );
   }
 
   &:active {
     background-image: linear-gradient(
-      ${({ theme }) => theme.colors.glow} 100%,
-      ${({ theme }) => theme.colors.glow} 100%
+      ${({ theme }) => theme.colors.highlight} 100%,
+      ${({ theme }) => theme.colors.highlight} 100%
     );
   }
 `;

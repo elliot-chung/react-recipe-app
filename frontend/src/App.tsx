@@ -23,7 +23,10 @@ function App() {
       <ThemeProvider theme={enableDarkMode ? darkTheme : lightTheme}>
         <GlobalStyle />
         <Router>
-          <Navbar setEnableDarkMode={setEnableDarkMode} />
+          <Navbar
+            enableDarkMode={enableDarkMode}
+            setEnableDarkMode={setEnableDarkMode}
+          />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/favorites" element={<Favorites />} />

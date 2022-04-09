@@ -1,5 +1,7 @@
 import React, { useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import SearchbarStyle from "../styles/Searchbar.style";
+import StyledButton from "../styles/Button.style";
 
 function Searchbar(): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,10 +29,10 @@ function Searchbar(): JSX.Element {
   // Add a keypress listener to the input element
   // When the user presses enter, call handleSubmit
   return (
-    <form onSubmit={handleSubmit}>
+    <SearchbarStyle onSubmit={handleSubmit}>
       <input ref={inputRef} onKeyPress={handleKeyPress} />
-      <button type="submit">Search</button>
-    </form>
+      <StyledButton type="submit">Search</StyledButton>
+    </SearchbarStyle>
   );
 }
 

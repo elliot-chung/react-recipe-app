@@ -8,7 +8,9 @@ import React, {
 } from "react";
 import FavoriteContext from "../contexts/FavoriteContext";
 import useAddFavoriteList from "../controllers/AddFavoriteListController";
+import StyledButton from "../styles/Button.style";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
+import StyledInput from "../styles/Input.style";
 
 function FavoriteListAdder(): JSX.Element {
   const { setAddFavorite, setEditMode, lists } = useContext(FavoriteContext);
@@ -50,7 +52,7 @@ function FavoriteListAdder(): JSX.Element {
 
   return (
     <StyledFavoriteListViewer>
-      <input
+      <StyledInput
         type="text"
         ref={inputRef}
         onBlur={handleCancel}
@@ -59,7 +61,7 @@ function FavoriteListAdder(): JSX.Element {
       {duplicateName && <p>List name already exists</p>}
       {isLoading && <p>Loading...</p>}
       {isError && <p>{(error as AxiosError).message}</p>}
-      <button
+      <StyledButton
         type="button"
         onClick={handleSave}
         onMouseDown={event => {
@@ -68,7 +70,7 @@ function FavoriteListAdder(): JSX.Element {
         }}
       >
         Save
-      </button>
+      </StyledButton>
     </StyledFavoriteListViewer>
   );
 }

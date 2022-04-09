@@ -4,6 +4,8 @@ const StyledRecipeCard = styled.div`
   --main-color: ${({ theme }) => theme.colors.secondaryBackground};
   --loading-color: ${({ theme }) => theme.colors.tertiaryBackground};
   --highlight-color: ${({ theme }) => theme.colors.highlight};
+  --text-color: ${({ theme }) => theme.colors.secondaryInk};
+  --text-color-highlight: ${({ theme }) => theme.colors.primaryInk};
   --card-size: ${({ theme }) => theme.componentSizes.recipeCardSize};
   --card-margin: calc(var(--card-size) / 30);
   --card-radius: calc(var(--card-size) / 30);
@@ -33,6 +35,11 @@ const StyledRecipeCard = styled.div`
 
     div {
       background-color: var(--highlight-color);
+
+      h5,
+      p {
+        color: var(--text-color-highlight);
+      }
     }
   }
 
@@ -64,6 +71,7 @@ const StyledRecipeCard = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
+      color: white;
     }
 
     h5:only-child {
@@ -74,6 +82,7 @@ const StyledRecipeCard = styled.div`
 
     p {
       font-size: 12px;
+      color: white;
     }
   }
 `;

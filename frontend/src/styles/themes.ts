@@ -14,11 +14,15 @@ declare module "styled-components" {
     };
     colors: {
       primaryInk: string;
+      secondaryInk: string;
       primaryBackground: string;
       secondaryBackground: string;
       tertiaryBackground: string;
       highlight: string;
       glow: string;
+    };
+    filters: {
+      home: string;
     };
   }
 }
@@ -40,11 +44,15 @@ export const lightTheme: DefaultTheme = {
   ...defaultVals,
   colors: {
     primaryInk: "#000000",
+    secondaryInk: "#ffffff",
     primaryBackground: "#fbfbfb",
-    secondaryBackground: "#ffffff",
-    tertiaryBackground: "#f4f4f4",
-    highlight: "#f7f7ff",
-    glow: "#add8e6ff",
+    secondaryBackground: "#0f9bff",
+    tertiaryBackground: "#d1d1d1",
+    highlight: "#c4c4ff",
+    glow: "#0f9bffb0",
+  },
+  filters: {
+    home: "invert(1)",
   },
 };
 
@@ -52,10 +60,14 @@ export const darkTheme: DefaultTheme = {
   ...defaultVals,
   colors: {
     primaryInk: "#DDDDDD",
+    secondaryInk: "#000000",
     primaryBackground: "#333333",
-    secondaryBackground: "#555555",
+    secondaryBackground: "#777777",
     tertiaryBackground: "#111111",
     highlight: "#22222C",
-    glow: "#ffffff40",
+    glow: "#ffffff80",
+  },
+  filters: {
+    home: "invert(1)",
   },
 };
