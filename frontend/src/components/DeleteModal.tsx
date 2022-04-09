@@ -2,7 +2,9 @@ import { AxiosError } from "axios";
 import React, { useEffect, useContext } from "react";
 import FavoriteContext from "../contexts/FavoriteContext";
 import useDeleteFavorite from "../controllers/DeleteFavoriteController";
+import StyledButton from "../styles/Button.style";
 import StyledModal from "../styles/Modal.style";
+import RedButton from "../styles/RedButton.style";
 
 function DeleteModal(): JSX.Element {
   const { listId, selected, setEditMode, setToDelete } =
@@ -26,7 +28,7 @@ function DeleteModal(): JSX.Element {
         <h2>Are You Sure You Want to Delete the Selected Items?</h2>
         {isLoading && <p>Loading...</p>}
         {isError && <p>Error: {(error as AxiosError).message}</p>}
-        <button
+        <StyledButton
           type="button"
           onClick={() => {
             setToDelete(false);
@@ -34,8 +36,8 @@ function DeleteModal(): JSX.Element {
           disabled={isLoading}
         >
           Cancel
-        </button>
-        <button
+        </StyledButton>
+        <RedButton
           type="button"
           onClick={() => {
             mutate(deleteData);
@@ -43,7 +45,7 @@ function DeleteModal(): JSX.Element {
           disabled={isLoading}
         >
           Delete
-        </button>
+        </RedButton>
       </div>
     </StyledModal>
   );

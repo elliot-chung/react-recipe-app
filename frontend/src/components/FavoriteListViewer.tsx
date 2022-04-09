@@ -11,6 +11,7 @@ import useRenameFavoriteList from "../controllers/RenameListController";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import StyledButton from "../styles/Button.style";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
+import StyledInput from "../styles/Input.style";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 import RecipeCard from "./RecipeCard";
 
@@ -148,7 +149,7 @@ function FavoriteListViewer({ list }: FavoriteListViewerProps) {
       >
         <div>
           {renameList ? (
-            <input
+            <StyledInput
               defaultValue={listName}
               // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus

@@ -4,6 +4,7 @@ const StyledRecipeCard = styled.div`
   --main-color: ${({ theme }) => theme.colors.secondaryBackground};
   --loading-color: ${({ theme }) => theme.colors.tertiaryBackground};
   --highlight-color: ${({ theme }) => theme.colors.highlight};
+  --select-color: ${({ theme }) => theme.colors.glow};
   --text-color: ${({ theme }) => theme.colors.secondaryInk};
   --text-color-highlight: ${({ theme }) => theme.colors.primaryInk};
   --card-size: ${({ theme }) => theme.componentSizes.recipeCardSize};
@@ -23,10 +24,6 @@ const StyledRecipeCard = styled.div`
   width: var(--card-size);
   height: var(--card-size);
   cursor: pointer;
-
-  .selected {
-    box-shadow: 0 var(--large-shadow-size) var(--large-shadow-size);
-  }
 
   &:hover {
     box-shadow: 0 var(--large-shadow-size) var(--large-shadow-size)
