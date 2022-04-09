@@ -1,12 +1,9 @@
 import express from "express";
-import {
-  simpleSearch,
-  getRecipeInfo,
-} from "../controllers/spoonacularController";
+import { search, getRecipeInfo } from "../controllers/spoonacularController";
 
 const router = express.Router();
 
-router.get("/search", simpleSearch);
+router.get("/search", search);
 router.get("/getRecipeInfo/:id", getRecipeInfo);
 
 export default router;

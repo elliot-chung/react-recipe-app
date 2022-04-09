@@ -5,6 +5,8 @@ import { useSearchParams } from "react-router-dom";
 
 interface SpoonacularSearchParams {
   query: string;
+  number: number;
+  offset: number;
 }
 
 const endpoint = import.meta.env.VITE_SPOONACULAR_SEARCH_ENDPOINT || "";
@@ -24,7 +26,11 @@ async function spoonacularSearch(
 function useSearch() {
   const [searchParams] = useSearchParams();
   const spoonacularSearchParams: SpoonacularSearchParams = useMemo(
-    () => ({ query: searchParams.get("query") || "" }),
+    () => ({
+      query: searchParams.get("query") || "",
+      number: 12,
+      offset: 0,
+    }),
     [searchParams]
   );
 

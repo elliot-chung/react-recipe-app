@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 
 interface SpoonacularSearchParams {
   query: string;
+  number: number;
+  offset: number;
 }
 
 async function spoonacularSearch(
@@ -32,11 +34,15 @@ async function spoonacularRecipeInfo(id: number) {
   return axios(config);
 }
 
-export async function simpleSearch(req: Request, res: Response) {
+export async function search(req: Request, res: Response) {
   const query = req.query.query?.toString() || "";
   if (!query) return res.status(400).send("Query not found");
+  const num = req.query.number?.toString() || "12";
+  const offset = req.query.offset?.toString() || "0";
   const searchParams: SpoonacularSearchParams = {
     query,
+    number: parseInt(num),
+    offset: parseInt(offset),
   };
   const response = await spoonacularSearch(searchParams);
   res.status(response.status).send(response.data);

@@ -6,6 +6,7 @@ const StyledRecipeCardContainer = styled.section`
 
   background-color: var(--background-color);
   display: grid;
+  justify-items: center;
 
   .selected {
     box-shadow: 0 0 0.35rem 0.35rem var(--select-color);
