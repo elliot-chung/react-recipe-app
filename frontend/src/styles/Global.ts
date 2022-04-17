@@ -169,36 +169,6 @@ const GlobalStyle = createGlobalStyle`
 
     main {
         margin-top: ${({ theme }) => theme.componentSizes.navbarHeight};
-        padding-top: 1rem;
-    }
-
-    /* main body padding */
-    ${({ theme }) => theme.mediaQueries.mobile} {
-        main {
-            margin-left: 1rem;
-            margin-right: 1rem;
-        }
-    }
-
-    ${({ theme }) => theme.mediaQueries.tablet} {
-        main {
-            margin-left: 2rem;
-            margin-right: 2rem;
-        }
-    }
-
-    ${({ theme }) => theme.mediaQueries.desktop} {
-        main {
-            margin-left: 3rem;
-            margin-right: 3rem;
-        }
-    }
-
-    ${({ theme }) => theme.mediaQueries.desktopL} {
-        main {
-            margin-left: 4rem;
-            margin-right: 4rem;
-        }
     }
 
 `;

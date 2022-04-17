@@ -9,7 +9,7 @@ const StyledButton = styled.button`
   padding: 0.35rem 0.5rem;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-  margin-left: 0.5rem;
+  margin-left: 0.5rems;
 `;
 
 export default StyledButton;

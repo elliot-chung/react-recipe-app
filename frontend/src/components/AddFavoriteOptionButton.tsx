@@ -1,4 +1,6 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import StyledButton from "../styles/Button.style";
+import StyledInput from "../styles/Input.style";
 
 type AddFavoriteOptionButtonProps = {
   createNewList: (name: string) => void;
@@ -13,6 +15,10 @@ function AddFavoriteOptionButton({
 
   const addNewList = useCallback(() => {
     setEditing(true);
+  }, []);
+
+  const cancelList = useCallback(() => {
+    setEditing(false);
   }, []);
 
   const saveNewList = useCallback(
@@ -40,25 +46,39 @@ function AddFavoriteOptionButton({
     [saveNewList]
   );
 
+  useEffect(() => {
+    if (editing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editing, inputRef]);
+
   return (
     <div>
       {editing ? (
         <form>
-          <input
+          <StyledInput
             type="text"
             placeholder="Favorite List Name"
             ref={inputRef}
+            onBlur={cancelList}
             onKeyPress={handleKeyPress}
           />
-          <button type="button" onClick={saveNewList}>
+          <StyledButton
+            type="button"
+            onClick={saveNewList}
+            onMouseDown={event => {
+              event.preventDefault();
+              event.stopPropagation();
+            }}
+          >
             Save
-          </button>
+          </StyledButton>
           {duplicateName && <p>List name already exists</p>}
         </form>
       ) : (
-        <button type="button" onClick={addNewList}>
+        <StyledButton type="button" onClick={addNewList}>
           Add to a New List
-        </button>
+        </StyledButton>
       )}
     </div>
   );

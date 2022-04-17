@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import StyledButton from "../styles/Button.style";
 
 type FavoriteHeartProps = {
   favoriteState: string;
@@ -13,18 +14,18 @@ function FavoriteHeart({ favoriteState, setShowModal }: FavoriteHeartProps) {
   const handleClick = useCallback(() => setShowModal(true), [setShowModal]);
 
   return (
-    <button type="button" disabled={loading} onClick={handleClick}>
+    <StyledButton type="button" disabled={loading} onClick={handleClick}>
       {isFavorite && (
-        <span role="img" aria-label="heart">
+        <p role="img" aria-label="heart">
           ❤️
-        </span>
+        </p>
       )}
       {isNotFavorite && (
-        <span role="img" aria-label="heart">
+        <p role="img" aria-label="heart">
           🖤
-        </span>
+        </p>
       )}
-    </button>
+    </StyledButton>
   );
 }
 

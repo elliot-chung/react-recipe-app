@@ -1,5 +1,6 @@
 import React from "react";
 import placeholder from "../assets/images/imageplaceholder.jpg";
+import StyledRecipeSidebar from "../styles/RecipeSidebar.style";
 import FavoriteHeart from "./FavoriteHeart";
 
 type RecipeSidebarProps = {
@@ -24,19 +25,21 @@ function RecipeSideBar({
   setShowModal,
 }: RecipeSidebarProps) {
   return (
-    <section>
+    <StyledRecipeSidebar>
       <img src={imgUrl || placeholder} alt={title} />
-      <h1>{title || loading}</h1>
-      <p>Ready in {readyInMinutes || loading} minutes</p>
-      <p>Servings: {servings || loading}</p>
-      <a href={sourceUrl} target="_blank" rel="noopener noreferrer">
-        <p>Original</p>
-      </a>
-      <FavoriteHeart
-        favoriteState={favoriteState}
-        setShowModal={setShowModal}
-      />
-    </section>
+      <div>
+        <h1>{title || loading}</h1>
+        <p>Ready in {readyInMinutes || loading} minutes</p>
+        <p>Servings: {servings || loading}</p>
+        <a href={sourceUrl} target="_blank" rel="noopener noreferrer">
+          <p>Original</p>
+        </a>
+        <FavoriteHeart
+          favoriteState={favoriteState}
+          setShowModal={setShowModal}
+        />
+      </div>
+    </StyledRecipeSidebar>
   );
 }
 
