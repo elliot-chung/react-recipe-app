@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useMemo } from "react";
-import StyledRecipeInstructions from "../styles/RecipeInstructions.style";
+import StyledRecipeSection from "../styles/RecipeSection.style";
 
 type RecipeInstructionsProps = {
   instructions: string;
@@ -17,7 +17,7 @@ function RecipeInstructions({ instructions }: RecipeInstructionsProps) {
   }, [instructions]);
 
   return (
-    <StyledRecipeInstructions>
+    <StyledRecipeSection>
       <h3>Instructions</h3>
       {!sanitizedArray || sanitizedArray.length === 0 ? (
         <p>No Instructions Found</p>
@@ -28,7 +28,7 @@ function RecipeInstructions({ instructions }: RecipeInstructionsProps) {
           ))}
         </ol>
       )}
-    </StyledRecipeInstructions>
+    </StyledRecipeSection>
   );
 }
 

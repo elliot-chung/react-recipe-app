@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import FavoriteModal from "../components/FavoriteModal";
+import RecipeIngredients from "../components/RecipeIngredients";
 import RecipeInstructions from "../components/RecipeInstructions";
 import RecipeSideBar from "../components/RecipeSideBar";
 import useRecipe from "../controllers/RecipeController";
@@ -18,6 +19,7 @@ function Recipe(): JSX.Element {
     servings,
     sourceUrl,
     instructions,
+    ingredients,
     favoriteState,
     setFavoriteState,
     modalKey,
@@ -53,6 +55,7 @@ function Recipe(): JSX.Element {
         setShowModal={setShowModal}
       />
       <StyledRecipeContentContainer>
+        <RecipeIngredients ingredients={ingredients} />
         <RecipeInstructions instructions={instructions} />
       </StyledRecipeContentContainer>
     </StyledRecipePage>

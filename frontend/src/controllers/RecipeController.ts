@@ -32,6 +32,7 @@ function useRecipe() {
         servings: data?.data?.servings || 0,
         sourceUrl: data?.data?.sourceUrl || "No Source Found",
         instructions: data?.data?.instructions || "No Instructions Found",
+        ingredients: data?.data?.extendedIngredients || "No Ingredients Found",
       };
     if (isError)
       return {
@@ -42,6 +43,7 @@ function useRecipe() {
         servings: 0,
         sourceUrl: "Error: No Source Found",
         instructions: "Error: No Instructions Found",
+        ingredients: "Error: No Ingredients Found",
       };
     return {
       id: 0,
@@ -51,8 +53,10 @@ function useRecipe() {
       servings: 0,
       sourceUrl: "Loading...",
       instructions: "Loading...",
+      ingredients: "Loading...",
     };
   }, [
+    data?.data?.extendedIngredients,
     data?.data?.id,
     data?.data?.image,
     data?.data?.instructions,

@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
-const StyledRecipeInstructions = styled.section`
+const StyledRecipeSection = styled.section`
+  padding: 1rem;
+  ul,
   ol {
     padding-left: 1rem;
   }
 
   ${({ theme }) => theme.mediaQueries.mobile} {
-    padding: 0;
+    padding: 1rem;
   }
 
   ${({ theme }) => theme.mediaQueries.tablet} {
-    padding: 1rem;
+    padding: 2rem;
   }
 
   ${({ theme }) => theme.mediaQueries.desktop} {
@@ -22,4 +24,4 @@ const StyledRecipeInstructions = styled.section`
   }
 `;
 
-export default StyledRecipeInstructions;
+export default StyledRecipeSection;
