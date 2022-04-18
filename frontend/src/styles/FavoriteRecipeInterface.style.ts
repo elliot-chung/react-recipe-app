@@ -10,9 +10,6 @@ const StyledFavoriteRecipeInterface = styled.div`
 
   margin: 2rem;
   padding: 1rem;
-  border-radius: 0.2rem;
-  box-shadow: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-  overflow: auto;
 `;
 
 export default StyledFavoriteRecipeInterface;

@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import ExistingList from "../sharedtypes/ExistingList";
 import StyledButton from "../styles/Button.style";
 import StyledFavoriteRecipeInterface from "../styles/FavoriteRecipeInterface.style";
+import StyledScrollContainer from "../styles/ScrollContainer.style";
 import AddFavoriteOptionButton from "./AddFavoriteOptionButton";
 import FavoriteOption from "./FavoriteOption";
 
@@ -76,20 +77,22 @@ function FavoriteRecipeInterface({
 
   return (
     <>
-      <StyledFavoriteRecipeInterface>
-        <AddFavoriteOptionButton createNewList={createNewList} />
-        {newLists}
-        {existingLists.map(list => (
-          <FavoriteOption
-            key={list.id}
-            id={list.id}
-            name={list.name}
-            alreadyFavorite={list.alreadyFavorite}
-            onSelect={selectExisting}
-            onDeselect={deselectExisting}
-          />
-        ))}
-      </StyledFavoriteRecipeInterface>
+      <StyledScrollContainer>
+        <StyledFavoriteRecipeInterface>
+          <AddFavoriteOptionButton createNewList={createNewList} />
+          {newLists}
+          {existingLists.map(list => (
+            <FavoriteOption
+              key={list.id}
+              id={list.id}
+              name={list.name}
+              alreadyFavorite={list.alreadyFavorite}
+              onSelect={selectExisting}
+              onDeselect={deselectExisting}
+            />
+          ))}
+        </StyledFavoriteRecipeInterface>
+      </StyledScrollContainer>
       <StyledButton type="button" onClick={handleSubmit} disabled={loading}>
         Submit
       </StyledButton>

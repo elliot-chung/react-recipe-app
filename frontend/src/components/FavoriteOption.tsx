@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import StyledFavoriteOption from "../styles/FavoriteOption.style";
 
 type FavoriteOptionProps = {
   id: string;
@@ -24,34 +25,34 @@ function FavoriteOption({
     }
   }, [id, onSelect, name]);
 
-  const handleClick = useCallback(() => {
-    if (alreadyFavorite) return;
-    setSelected(!selected);
-    if (selected) onDeselect(id);
-    else onSelect(id);
-  }, [alreadyFavorite, id, onDeselect, onSelect, selected]);
-
   const remove = useCallback(() => {
     onDeselect(name);
     setShowing(false);
   }, [name, onDeselect]);
 
+  const handleClick = useCallback(() => {
+    if (!id) {
+      remove();
+      return;
+    }
+    if (alreadyFavorite) return;
+    setSelected(!selected);
+    if (selected) onDeselect(id);
+    else onSelect(id);
+  }, [alreadyFavorite, id, onDeselect, onSelect, remove, selected]);
+
   return showing ? (
-    <div
+    <StyledFavoriteOption
       role="checkbox"
       tabIndex={0}
       aria-checked={selected}
       onClick={handleClick}
       onKeyDown={handleClick}
+      newList={!id}
     >
-      {!id && (
-        <button type="button" onClick={remove}>
-          ❌
-        </button>
-      )}
       <p>{name}</p>
       {selected && <p>✔️</p>}
-    </div>
+    </StyledFavoriteOption>
   ) : null;
 }
 

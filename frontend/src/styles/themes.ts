@@ -20,6 +20,7 @@ declare module "styled-components" {
       tertiaryBackground: string;
       highlight: string;
       glow: string;
+      red: string;
     };
     filters: {
       home: string;
@@ -50,6 +51,7 @@ export const lightTheme: DefaultTheme = {
     tertiaryBackground: "#d1d1d1",
     highlight: "#c4c4ff",
     glow: "#0f9bffb0",
+    red: "#ff7070",
   },
   filters: {
     home: "invert(1)",
@@ -66,6 +68,7 @@ export const darkTheme: DefaultTheme = {
     tertiaryBackground: "#111111",
     highlight: "#22222C",
     glow: "#ffffff80",
+    red: "#ff4050",
   },
   filters: {
     home: "invert(1)",
