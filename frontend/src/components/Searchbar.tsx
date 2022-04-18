@@ -11,7 +11,9 @@ function Searchbar(): JSX.Element {
     (e: React.SyntheticEvent): void => {
       e.preventDefault();
       if (inputRef.current && inputRef.current.value) {
-        navigate(`/search?query=${encodeURIComponent(inputRef.current.value)}`);
+        navigate(
+          `/search?query=${encodeURIComponent(inputRef.current.value)}&page=1`
+        );
       }
     },
     [navigate]

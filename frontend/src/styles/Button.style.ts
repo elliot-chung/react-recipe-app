@@ -14,6 +14,11 @@ const StyledButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.glow};
   }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.tertiaryBackground};
+    cursor: auto;
+  }
 `;
 
 export default StyledButton;

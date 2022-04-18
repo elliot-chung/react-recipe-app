@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 
@@ -25,19 +25,39 @@ async function spoonacularSearch(
 
 function useSearch() {
   const [searchParams] = useSearchParams();
+  const page = useMemo(
+    () => parseInt(searchParams.get("page") || "1", 10),
+    [searchParams]
+  );
+
+  const [pageChange, setPageChange] = useState(true);
+
   const spoonacularSearchParams: SpoonacularSearchParams = useMemo(
     () => ({
       query: searchParams.get("query") || "",
       number: 12,
-      offset: 0,
+      offset: (page - 1) * 12,
     }),
-    [searchParams]
+    [page, searchParams]
   );
 
   const reactQueryObj = useQuery(
     ["search", spoonacularSearchParams.query],
-    () => spoonacularSearch(spoonacularSearchParams)
+    () => spoonacularSearch(spoonacularSearchParams),
+    {
+      enabled: pageChange,
+    }
   );
+
+  useEffect(() => {
+    setPageChange(true);
+  }, [page]);
+
+  useEffect(() => {
+    if (reactQueryObj.isSuccess) {
+      setPageChange(false);
+    }
+  }, [reactQueryObj]);
 
   return {
     ...spoonacularSearchParams,
