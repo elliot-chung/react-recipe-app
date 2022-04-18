@@ -42,7 +42,7 @@ function useSearch() {
   );
 
   const reactQueryObj = useQuery(
-    ["search", spoonacularSearchParams.query],
+    ["search", `${page}-${spoonacularSearchParams.query}`],
     () => spoonacularSearch(spoonacularSearchParams),
     {
       enabled: pageChange,
@@ -54,7 +54,7 @@ function useSearch() {
   }, [page]);
 
   useEffect(() => {
-    if (reactQueryObj.isSuccess) {
+    if (reactQueryObj.isLoading) {
       setPageChange(false);
     }
   }, [reactQueryObj]);

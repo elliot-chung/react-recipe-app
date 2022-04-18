@@ -40,7 +40,10 @@ function RecipeCard({
       onClick={handleClick}
       className={selected ? "selected" : undefined}
     >
-      <img src={image} alt={title} />
+      <img
+        src={image || "https://spoonacular.com/recipeImages/default.jpg"}
+        alt={title}
+      />
       <div>
         <h5>{title}</h5>
         {!!readyInMinutes && <p>Ready in {readyInMinutes} minutes</p>}

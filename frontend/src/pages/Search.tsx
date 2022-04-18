@@ -14,16 +14,25 @@ interface SearchResult {
   title: string;
 }
 
-let baseImageUri = "https://spoonacular.com/recipeImages/";
+const loadingCard = (
+  <RecipeCard
+    id={0}
+    image=""
+    readyInMinutes={0}
+    servings={0}
+    title="Loading..."
+  />
+);
 
 function Search(): JSX.Element {
   const { query, data, error, isError, isLoading, isSuccess } = useSearch();
-  if (isSuccess) baseImageUri = data?.data.baseUri || baseImageUri;
+  const baseImageUri = isSuccess
+    ? data?.data.baseUri
+    : "https://spoonacular.com/recipeImages/";
   return (
     <StyledSearchPage>
       <h1>Showing results for: {query}</h1>
       {isError && <p>Error: {(error as AxiosError).message}</p>}
-      {isLoading && <p>Loading...</p>}
       <StyledRecipeCardContainer>
         {isSuccess &&
           data?.data.results.map((item: SearchResult) => (
@@ -36,6 +45,7 @@ function Search(): JSX.Element {
               title={item.title}
             />
           ))}
+        {isLoading && [...Array(12)].map(() => loadingCard)}
       </StyledRecipeCardContainer>
       <SearchPageButtons totalResults={data?.data.totalResults} />
     </StyledSearchPage>
