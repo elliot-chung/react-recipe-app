@@ -18,7 +18,7 @@ const StyledRecipeInstructions = styled.section`
   }
 
   ${({ theme }) => theme.mediaQueries.desktopL} {
-    padding: 3rem;
+    padding: 4rem;
   }
 `;
 

@@ -14,6 +14,10 @@ const StyledFavoriteListViewer = styled.div`
   cursor: pointer;
 
   div {
+    * {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
     display: flex;
     flex-direction: row;
   }

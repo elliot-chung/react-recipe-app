@@ -3,6 +3,7 @@ import React from "react";
 import RecipeCard from "../components/RecipeCard";
 import useSearch from "../controllers/SearchController";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
+import StyledSearchPage from "../styles/Search.style";
 
 interface SearchResult {
   id: number;
@@ -18,7 +19,7 @@ function Search(): JSX.Element {
   const { query, data, error, isError, isLoading, isSuccess } = useSearch();
   if (isSuccess) baseImageUri = data?.data.baseUri || baseImageUri;
   return (
-    <main>
+    <StyledSearchPage>
       <h1>Showing results for: {query}</h1>
       {isError && <p>Error: {(error as AxiosError).message}</p>}
       {isLoading && <p>Loading...</p>}
@@ -35,7 +36,7 @@ function Search(): JSX.Element {
             />
           ))}
       </StyledRecipeCardContainer>
-    </main>
+    </StyledSearchPage>
   );
 }
 

@@ -1,22 +1,23 @@
 import styled from "styled-components";
 
-const StyledRecipePage = styled.main`
-  position: relative;
+const StyledSearchPage = styled.main`
+  padding: 0.5rem;
 
   ${({ theme }) => theme.mediaQueries.mobile} {
-    flex-direction: column;
+    padding: 0.5rem;
   }
 
   ${({ theme }) => theme.mediaQueries.tablet} {
-    flex-direction: column;
+    padding: 1rem;
   }
 
   ${({ theme }) => theme.mediaQueries.desktop} {
-    flex-direction: row;
+    padding: 2rem;
   }
 
   ${({ theme }) => theme.mediaQueries.desktopL} {
-    flex-direction: row;
+    padding: 3rem;
   }
 `;
-export default StyledRecipePage;
+
+export default StyledSearchPage;

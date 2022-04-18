@@ -10,6 +10,10 @@ const StyledButton = styled.button`
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   margin-left: 0.5rems;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.glow};
+  }
 `;
 
 export default StyledButton;

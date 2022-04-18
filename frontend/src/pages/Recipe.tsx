@@ -6,6 +6,7 @@ import RecipeSideBar from "../components/RecipeSideBar";
 import useRecipe from "../controllers/RecipeController";
 import ListItem from "../sharedtypes/ListItem";
 import StyledRecipePage from "../styles/Recipe.style";
+import StyledRecipeContentContainer from "../styles/RecipeContentContainer.style";
 
 function Recipe(): JSX.Element {
   const {
@@ -51,9 +52,9 @@ function Recipe(): JSX.Element {
         favoriteState={favoriteState}
         setShowModal={setShowModal}
       />
-      <article>
+      <StyledRecipeContentContainer>
         <RecipeInstructions instructions={instructions} />
-      </article>
+      </StyledRecipeContentContainer>
     </StyledRecipePage>
   );
 }
