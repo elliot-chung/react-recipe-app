@@ -33,7 +33,7 @@ function Searchbar(): JSX.Element {
   return (
     <SearchbarStyle onSubmit={handleSubmit}>
       <input ref={inputRef} onKeyPress={handleKeyPress} />
-      <StyledButton type="submit">Search</StyledButton>
+      <StyledButton type="submit">🔎</StyledButton>
     </SearchbarStyle>
   );
 }

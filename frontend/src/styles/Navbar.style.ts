@@ -22,9 +22,29 @@ const StyledNavbar = styled.nav`
   transition: all 0.2s ease;
   box-sizing: border-box;
 
+  a {
+    display: flex;
+    align-items: center;
+  }
   a img {
-    height: var(--navbar-height);
     filter: var(--home-filter);
+    height: calc(var(--navbar-height) / 1.2);
+
+    ${({ theme }) => theme.mediaQueries.mobile} {
+      height: calc(var(--navbar-height) / 1.2);
+    }
+
+    ${({ theme }) => theme.mediaQueries.tablet} {
+      height: calc(var(--navbar-height) / 1.1);
+    }
+
+    ${({ theme }) => theme.mediaQueries.desktop} {
+      height: calc(var(--navbar-height) / 1.05);
+    }
+
+    ${({ theme }) => theme.mediaQueries.desktopL} {
+      height: var(--navbar-height);
+    }
   }
 `;
 
