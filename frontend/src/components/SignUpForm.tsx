@@ -3,7 +3,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 import FormValues from "../sharedtypes/RegisterFormValues";
+import StyledInput from "../styles/Input.style";
+import StyledButton from "../styles/Button.style";
+import StyledSignUpForm from "../styles/SignUpForm.style";
 
 interface Props {
   onSubmit: (values: FormValues) => void;
@@ -38,30 +42,35 @@ function SignUpForm({ onSubmit }: Props): JSX.Element {
   });
 
   return (
-    <>
+    <StyledSignUpForm onSubmit={handleSubmit(onSubmit)}>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name")} type="text" placeholder="Name" />
-        {errors.name && <p> {errors.name.message} </p>}
-        <input {...register("email")} type="email" placeholder="Email" />
-        {errors.email && <p> {errors.email.message} </p>}
-        <input
-          {...register("password")}
-          type="password"
-          placeholder="Password"
-        />
-        {errors.password && <p> {errors.password.message} </p>}
-        <input
-          {...register("passwordConfirmation")}
-          type="password"
-          placeholder="Password Confirmation"
-        />
-        {errors.passwordConfirmation && (
-          <p> {errors.passwordConfirmation.message} </p>
-        )}
-        <input type="submit" value="Submit" />
-      </form>
-    </>
+      <StyledInput {...register("name")} type="text" placeholder="Name" />
+      {errors.name && <p> {errors.name.message} </p>}
+      <StyledInput {...register("email")} type="email" placeholder="Email" />
+      {errors.email && <p> {errors.email.message} </p>}
+      <StyledInput
+        {...register("password")}
+        type="password"
+        placeholder="Password"
+      />
+      {errors.password && <p> {errors.password.message} </p>}
+      <StyledInput
+        {...register("passwordConfirmation")}
+        type="password"
+        placeholder="Password Confirmation"
+      />
+      {errors.passwordConfirmation && (
+        <p> {errors.passwordConfirmation.message} </p>
+      )}
+      <div>
+        <StyledButton type="submit" value="Submit">
+          Submit
+        </StyledButton>
+        <Link to="/login">
+          <StyledButton>Sign In</StyledButton>
+        </Link>
+      </div>
+    </StyledSignUpForm>
   );
 }
 

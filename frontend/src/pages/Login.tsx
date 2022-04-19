@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import SignInForm from "../components/SignInForm";
 import LoginContext from "../contexts/LoginContext";
 import useLogin from "../controllers/LoginController";
+import StyledLoginPage from "../styles/Login.style";
 
 function Login(): JSX.Element {
   const userStates = useContext(LoginContext);
@@ -20,13 +21,12 @@ function Login(): JSX.Element {
   }
 
   return (
-    <main>
+    <StyledLoginPage>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error: {(error as AxiosError).message}</p>}
       {isSuccess && <p>Success!</p>}
       <SignInForm onSubmit={onSubmit} />
-      <Link to="/signup">Sign Up</Link>
-    </main>
+    </StyledLoginPage>
   );
 }
 
