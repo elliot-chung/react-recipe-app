@@ -3,16 +3,9 @@ import React from "react";
 import RecipeCard from "../components/RecipeCard";
 import SearchPageButtons from "../components/SearchPageButtons";
 import useSearch from "../hooks/SearchController";
+import SearchResult from "../sharedtypes/SearchResult";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 import StyledSearchPage from "../styles/Search.style";
-
-interface SearchResult {
-  id: number;
-  image: string;
-  readyInMinutes: number;
-  servings: number;
-  title: string;
-}
 
 const loadingCard = (
   <RecipeCard

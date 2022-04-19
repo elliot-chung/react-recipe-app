@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import axios, { AxiosRequestConfig } from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 const endpoint =
   import.meta.env.VITE_SPOONACULAR_POPULAR_RECIPES_ENDPOINT || "";
@@ -15,13 +15,9 @@ async function getPopularRecipes(number: number) {
 }
 
 function usePopularRecipes() {
-  const [refresh, setRefresh] = useState(true);
   const { data, isError, isSuccess, isLoading } = useQuery(
     "popularRecipes",
-    () => getPopularRecipes(12),
-    {
-      enabled: refresh,
-    }
+    () => getPopularRecipes(12)
   );
 
   const recipes = useMemo(() => {
@@ -29,17 +25,11 @@ function usePopularRecipes() {
     return [];
   }, [data?.data?.recipes, isSuccess]);
 
-  useEffect(() => {
-    if (isSuccess) setRefresh(false);
-  }, [isSuccess]);
-
   return {
     recipes,
     isError,
     isSuccess,
     isLoading,
-    refresh,
-    setRefresh,
   };
 }
 
