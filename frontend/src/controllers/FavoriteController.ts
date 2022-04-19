@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { useEffect, useMemo, useState } from "react";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import useGetFavorite from "./GetFavoritesController";
@@ -57,7 +58,7 @@ function useFavorite() {
     isSuccess,
     isLoading,
     isError,
-    error,
+    error: error as AxiosError,
     lists,
   };
 }
