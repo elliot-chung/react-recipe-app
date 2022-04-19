@@ -5,24 +5,22 @@ const StyledHomePage = styled.main`
   display: flex;
   flex-direction: column;
 
-  h1 {
-    margin: 1rem;
+  padding: 0.5rem;
 
-    ${({ theme }) => theme.mediaQueries.mobile} {
-      margin: 1rem;
-    }
+  ${({ theme }) => theme.mediaQueries.mobile} {
+    padding: 0.5rem;
+  }
 
-    ${({ theme }) => theme.mediaQueries.tablet} {
-      margin: 2rem;
-    }
+  ${({ theme }) => theme.mediaQueries.tablet} {
+    padding: 1rem;
+  }
 
-    ${({ theme }) => theme.mediaQueries.desktop} {
-      margin: 3rem;
-    }
+  ${({ theme }) => theme.mediaQueries.desktop} {
+    padding: 2rem;
+  }
 
-    ${({ theme }) => theme.mediaQueries.desktopL} {
-      margin: 4rem;
-    }
+  ${({ theme }) => theme.mediaQueries.desktopL} {
+    padding: 3rem;
   }
 `;
 

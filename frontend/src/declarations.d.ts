@@ -70,6 +70,7 @@ interface ImportMetaEnv {
   readonly VITE_REMOVE_FAVORITE_LIST_ENDPOINT: string;
   readonly VITE_SPOONACULAR_SEARCH_ENDPOINT: string;
   readonly VITE_SPOONACULAR_RECIPE_ENDPOINT: string;
+  readonly VITE_SPOONACULAR_POPULAR_RECIPES_ENDPOINT: string;
 }
 
 interface ImportMeta {

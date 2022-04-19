@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.get("/search", search);
 router.get("/getRecipeInfo/:id", getRecipeInfo);
-router.get("/getRandomRecipes/:number", getRandomRecipes);
+router.get("/getPopularRecipes/:number", getRandomRecipes);
 
 export default router;
