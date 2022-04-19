@@ -4,7 +4,7 @@ import FavoriteContext from "../contexts/FavoriteContext";
 import EditModeButton from "../components/EditModeButton";
 import FavoritesInterface from "../components/FavoritesInterface";
 import DeleteModal from "../components/DeleteModal";
-import useFavorite from "../controllers/FavoriteController";
+import useFavorite from "../hooks/FavoriteController";
 import StyledFavoritePage from "../styles/Favorite.style";
 import DeleteListModal from "../components/DeleteListModal";
 import AddListButton from "../components/AddListButton";

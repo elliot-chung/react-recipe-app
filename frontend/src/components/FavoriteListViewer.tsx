@@ -7,7 +7,7 @@ import React, {
   useEffect,
 } from "react";
 import FavoriteContext from "../contexts/FavoriteContext";
-import useRenameFavoriteList from "../controllers/RenameListController";
+import useRenameFavoriteList from "../hooks/RenameListController";
 import FavoriteList from "../sharedtypes/FavoriteList";
 import StyledButton from "../styles/Button.style";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";

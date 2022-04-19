@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import React, { useEffect, useContext } from "react";
 import FavoriteContext from "../contexts/FavoriteContext";
-import useDeleteFavorite from "../controllers/DeleteFavoriteController";
+import useDeleteFavorite from "../hooks/DeleteFavoriteController";
 import StyledButton from "../styles/Button.style";
 import StyledModalBackground from "../styles/ModalBackground.style";
 import StyledModal from "../styles/Modal.style";

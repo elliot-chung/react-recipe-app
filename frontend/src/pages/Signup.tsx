@@ -1,6 +1,6 @@
 import React from "react";
 import { AxiosError } from "axios";
-import useSignup from "../controllers/SignupController";
+import useSignup from "../hooks/SignupController";
 import SignUpForm from "../components/SignUpForm";
 import StyledSignupPage from "../styles/Signup.style";
 

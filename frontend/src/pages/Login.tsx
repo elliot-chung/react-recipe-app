@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { Link } from "react-router-dom";
 import SignInForm from "../components/SignInForm";
 import LoginContext from "../contexts/LoginContext";
-import useLogin from "../controllers/LoginController";
+import useLogin from "../hooks/LoginController";
 import StyledLoginPage from "../styles/Login.style";
 
 function Login(): JSX.Element {

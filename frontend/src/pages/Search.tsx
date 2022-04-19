@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import React from "react";
 import RecipeCard from "../components/RecipeCard";
 import SearchPageButtons from "../components/SearchPageButtons";
-import useSearch from "../controllers/SearchController";
+import useSearch from "../hooks/SearchController";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 import StyledSearchPage from "../styles/Search.style";
 

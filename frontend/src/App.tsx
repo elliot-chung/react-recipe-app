@@ -12,7 +12,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
-import useAuth from "./controllers/AuthController";
+import useAuth from "./hooks/AuthController";
 
 function App() {
   const loginContextObj = useAuth();

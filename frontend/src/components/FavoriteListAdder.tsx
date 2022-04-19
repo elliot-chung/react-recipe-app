@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import FavoriteContext from "../contexts/FavoriteContext";
-import useAddFavoriteList from "../controllers/AddFavoriteListController";
+import useAddFavoriteList from "../hooks/AddFavoriteListController";
 import StyledButton from "../styles/Button.style";
 import StyledFavoriteListViewer from "../styles/FavoriteListViewer.style";
 import StyledInput from "../styles/Input.style";

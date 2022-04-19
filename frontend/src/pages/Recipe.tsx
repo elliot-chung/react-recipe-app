@@ -4,7 +4,7 @@ import FavoriteModal from "../components/FavoriteModal";
 import RecipeIngredients from "../components/RecipeIngredients";
 import RecipeInstructions from "../components/RecipeInstructions";
 import RecipeSideBar from "../components/RecipeSideBar";
-import useRecipe from "../controllers/RecipeController";
+import useRecipe from "../hooks/RecipeController";
 import ListItem from "../sharedtypes/ListItem";
 import StyledRecipePage from "../styles/Recipe.style";
 import StyledRecipeContentContainer from "../styles/RecipeContentContainer.style";
