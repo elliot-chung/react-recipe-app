@@ -13,9 +13,6 @@ async function loginUser(values: FormValues): Promise<AxiosResponse> {
     method: "post",
     url: endpoint,
     data: values,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
   };
 
   return axios(config);
