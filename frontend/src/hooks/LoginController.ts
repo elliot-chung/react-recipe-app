@@ -14,8 +14,7 @@ async function loginUser(values: FormValues): Promise<AxiosResponse> {
     url: endpoint,
     data: values,
     headers: {
-      "Access-Control-Allow-Origin":
-        "https://react-recipe-app-kappa.vercel.app/",
+      "Access-Control-Allow-Origin": "*",
     },
   };
 
