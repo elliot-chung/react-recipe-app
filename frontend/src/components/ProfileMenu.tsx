@@ -41,12 +41,11 @@ function ProfileMenu({ enableDarkMode, setEnableDarkMode }: ProfileMenuProps) {
           }}
         >
           {isLoggedIn && (
-            <Link to="/favorites">
-              <div>
-                <p>❤️</p>
-                <p>My Favorites</p>
-              </div>
-            </Link>
+            <div>
+              <Link to="/favorites">
+                <p>❤️ My Favorites</p>
+              </Link>
+            </div>
           )}
           <div
             role="checkbox"
