@@ -25,6 +25,7 @@ async function spoonacularSearch(
 
 function useSearch() {
   const [searchParams] = useSearchParams();
+  const query = useMemo(() => searchParams.get("query") || "", [searchParams]);
   const page = useMemo(
     () => parseInt(searchParams.get("page") || "1", 10),
     [searchParams]
@@ -34,11 +35,11 @@ function useSearch() {
 
   const spoonacularSearchParams: SpoonacularSearchParams = useMemo(
     () => ({
-      query: searchParams.get("query") || "",
+      query,
       number: 12,
       offset: (page - 1) * 12,
     }),
-    [page, searchParams]
+    [page, query]
   );
 
   const reactQueryObj = useQuery(
@@ -51,7 +52,7 @@ function useSearch() {
 
   useEffect(() => {
     setPageChange(true);
-  }, [page]);
+  }, [page, query]);
 
   useEffect(() => {
     if (reactQueryObj.isLoading) {
