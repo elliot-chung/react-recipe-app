@@ -4,7 +4,7 @@
 
 ## Overview
 
-This is a small application for finding and tracking recipes. User can search through a large catalog of recipes and save their favorites to lists; which are saved to each users' own account. The app is implemented using the MERN stack. There are further details on the tools/libraries used in FRONTEND.md and BACKEND.md.
+This is a small application for finding and tracking recipes. User can search through a large catalog of recipes and save their favorites to lists; which are saved to each users' own account. The app is implemented using the MERN stack. There are further details on the tools/libraries used in FRONTEND.md and BACKEND.md. All the recipe information comes from the [Spoonacular](https://spoonacular.com/) API.
 
 ## Search and Find Thousands of Recipes
 
