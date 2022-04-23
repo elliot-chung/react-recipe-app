@@ -8,7 +8,6 @@
     "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-google-login": "^5.2.2",
     "react-hook-form": "^7.28.0",
     "react-query": "^3.34.16",
     "react-router-dom": "^6.2.2",
@@ -20,7 +19,7 @@
   "scripts": {
     "vite": "vite --open",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "vite build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
