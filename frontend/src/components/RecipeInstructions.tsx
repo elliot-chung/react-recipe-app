@@ -11,9 +11,14 @@ function RecipeInstructions({ instructions }: RecipeInstructionsProps) {
     if (instructions === "No Instructions Found") return [];
     const removedHeader = instructions.replace(/^[Ii]nstruction\S*\s+/, "");
     const instructionsArray = removedHeader.split(/\.(?:\)|(?:\s+\())*/);
-    return instructionsArray.filter(
-      (item: string) => item !== "" && item.match(/^\d+$/) === null
+    const removedTagArray = instructionsArray.map(
+      (instruction: string) => instruction.replace(/<[^>]*>/g, "")
     );
+    const nonEmptyInstructionsArray = removedTagArray.filter(
+      (item: string) => item !== "" && 
+                        item.match(/^\d+$/) === null 
+    );
+    return nonEmptyInstructionsArray;
   }, [instructions]);
 
   return (
