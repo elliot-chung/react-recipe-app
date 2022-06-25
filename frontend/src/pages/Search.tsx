@@ -7,16 +7,6 @@ import SearchResult from "../sharedtypes/SearchResult";
 import StyledRecipeCardContainer from "../styles/RecipeCardContainer.style";
 import StyledSearchPage from "../styles/Search.style";
 
-const loadingCard = (
-  <RecipeCard
-    id={0}
-    image=""
-    readyInMinutes={0}
-    servings={0}
-    title="Loading..."
-  />
-);
-
 function Search(): JSX.Element {
   const { query, data, error, isError, isLoading, isSuccess } = useSearch();
   const baseImageUri = isSuccess
@@ -38,7 +28,16 @@ function Search(): JSX.Element {
               title={item.title}
             />
           ))}
-        {isLoading && [...Array(12)].map(() => loadingCard)}
+        {isLoading && [...Array(12)].map((item, ind) => (
+          <RecipeCard
+            key={ind}
+            id={0}
+            image={""}
+            readyInMinutes={0}
+            servings={0}
+            title={"Loading..."}
+          />
+        ))}
       </StyledRecipeCardContainer>
       <SearchPageButtons totalResults={data?.data.totalResults} />
     </StyledSearchPage>
