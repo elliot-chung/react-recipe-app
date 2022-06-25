@@ -20,6 +20,7 @@ function SignInForm({ onSubmit }: Props): JSX.Element {
   return (
     <StyledSignInForm onSubmit={handleSubmit(onSubmit)}>
       <h1>Sign In</h1>
+      <p>*Note: Feel free to use a fake email/password when signing up</p>
       <StyledInput
         {...register("email", { required: true })}
         type="email"
