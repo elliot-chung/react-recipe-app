@@ -18,6 +18,7 @@ mongoose.connect(`${process.env.CONNECTION_URL}`);
 
 const app = express();
 
+const ip = process.env.IP || "localhost";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -25,6 +26,7 @@ app.use(
     origin: [
       "https://react-recipe-app-kappa.vercel.app",
       "http://localhost:3000",
+      `http://${ip}:3000`,
     ],
   })
 );
