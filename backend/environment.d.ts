@@ -6,6 +6,7 @@ declare global {
       JWT_SECRET: string;
       RAPID_API_HOST: string;
       RAPID_API_KEY: string;
+      IP: string;
     }
   }
   namespace Express {
