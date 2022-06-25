@@ -21,8 +21,14 @@ function SearchPageButtons({ totalResults }: SearchPageButtonsProps) {
   );
 
   const totalPages = useMemo(
-    () => Math.ceil(totalResults / 12),
-    [totalResults]
+    () => {
+      // only update the value of total pages if totalResults is a number
+      if (typeof totalResults === "number") {
+        return Math.ceil(totalResults / 10);
+      } else {
+        return 100;
+      }
+    },[totalResults]
   );
 
   const nextPage = useCallback(() => {
