@@ -21,7 +21,6 @@ function RecipeInstructions({ instructions }: RecipeInstructionsProps) {
       (item: string) => item !== "" && 
                         item.match(/^\d+$/) === null 
     );
-    console.log(nonEmptyInstructionsArray);
     return nonEmptyInstructionsArray;
   }, [instructions]);
 

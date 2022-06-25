@@ -27,6 +27,7 @@ function toFraction(value: number) {
     if ((value * denominator) % 1 >= 0.5) {
       numerator = ((value % 1) + 1) * denominator;
     }
+    if (numerator % 1 < 0.001) numerator = Math.floor(numerator);
     return `${str} ${numerator}/${denominator}`;
   });
   return results.reduce((a, b) => (a.length <= b.length ? a : b));
@@ -40,9 +41,10 @@ function RecipeIngredients({ ingredients }: RecipeIngredientsProps) {
         <p>{ingredients}</p>
       ) : (
         <ul>
-          {ingredients.map(ingredient => (
-            <li key={ingredient.id}>
-              {toFraction(ingredient.amount)} {ingredient.unit}{" "}
+          {ingredients.map((ingredient, ind) => (
+            <li key = {`${ingredient.id}-${ind}`} >
+              {toFraction(ingredient.amount)}{" "}
+              {ingredient.unit}{" "}
               {ingredient.name}
             </li>
           ))}
