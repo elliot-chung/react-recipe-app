@@ -22,10 +22,10 @@ function Login(): JSX.Element {
 
   return (
     <StyledLoginPage>
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>Error: {(error as AxiosError).message}</p>}
       {isSuccess && <p>Success!</p>}
       <SignInForm onSubmit={onSubmit} />
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>{(error as AxiosError).request.response}</p>}
     </StyledLoginPage>
   );
 }

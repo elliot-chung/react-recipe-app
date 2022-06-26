@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 interface SpoonacularSearchParams {
   query: string;
@@ -47,29 +47,41 @@ async function spoonacularGetRandomRecipes(number: number) {
   return axios(config);
 }
 
-export async function search(req: Request, res: Response) {
-  const query = req.query.query?.toString() || "";
-  if (!query) return res.status(400).send("Query not found");
-  const num = req.query.number?.toString() || "12";
-  const offset = req.query.offset?.toString() || "0";
-  const searchParams: SpoonacularSearchParams = {
-    query,
-    number: parseInt(num),
-    offset: parseInt(offset),
-  };
-  const response = await spoonacularSearch(searchParams);
-  res.status(response.status).send(response.data);
+export async function search(req: Request, res: Response, next: NextFunction) {
+  try {
+    const query = req.query.query?.toString() || "";
+    if (!query) throw new Error("No query provided");
+    const num = req.query.number?.toString() || "12";
+    const offset = req.query.offset?.toString() || "0";
+    const searchParams: SpoonacularSearchParams = {
+      query,
+      number: parseInt(num),
+      offset: parseInt(offset),
+    };
+    const response = await spoonacularSearch(searchParams);
+    res.status(response.status).send(response.data);
+  } catch(error) {
+    next(error)
+  }
 }
 
-export async function getRecipeInfo(req: Request, res: Response) {
-  const id = Number(req.params.id);
-  if (!id) return res.status(400).send("Id not found");
-  const response = await spoonacularRecipeInfo(id);
-  res.status(response.status).send(response.data);
+export async function getRecipeInfo(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = Number(req.params.id);
+    if (!id) throw new Error("No id provided");
+    const response = await spoonacularRecipeInfo(id);
+    res.status(response.status).send(response.data);
+  } catch(error) {
+    next(error)
+  }
 }
 
-export async function getRandomRecipes(req: Request, res: Response) {
-  const number = req.query.number?.toString() || "12";
-  const response = await spoonacularGetRandomRecipes(parseInt(number));
-  res.status(response.status).send(response.data);
+export async function getRandomRecipes(req: Request, res: Response, next: NextFunction) {
+  try {
+    const number = req.query.number?.toString() || "12";
+    const response = await spoonacularGetRandomRecipes(parseInt(number));
+    res.status(response.status).send(response.data);
+  } catch(error) {
+    next(error)
+  }
 }
