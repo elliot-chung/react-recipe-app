@@ -20,14 +20,12 @@ mongoose.connect(`${process.env.CONNECTION_URL}`);
 const app = express();
 
 // Middleware
-const ip = process.env.IP;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
-      "https://react-recipe-app-kappa.vercel.app",
-      `http://${ip}`,
+      "https://react-recipe-app-kappa.vercel.app"
     ],
   })
 );
